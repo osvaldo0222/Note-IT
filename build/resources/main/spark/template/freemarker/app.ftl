@@ -77,14 +77,14 @@
                                 <div class="row">
                                   <div class="col">
                                       <div class="md-form form-sm">
-                                          <input type="text" id="inputSMEx" class="pubTitle form-control form-control-sm">
+                                          <input type="text" id="inputSMEx" class="pubTitle form-control form-control-sm" name="name-article">
                                           <label for="inputSMEx">Título</label>
                                         </div>
                                   </div>
                                   <div class="col">
                                       <div class="md-form form-sm">
                                           <input type="text" id="inputSMEx" class="pubPublication form-control form-control-sm">
-                                          <label for="inputSMEx">Etiqueras</label>
+                                          <label for="inputSMEx">Etiquetas</label>
                                         </div>
                                   </div>
                                 </div>

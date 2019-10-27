@@ -5,14 +5,26 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
+import noteit.services.BootstrapService;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class Main {
     public static void main(String[] args) {
+        //Starting DB
+        BootstrapService.getInstance().startDb();
+
+        //Creating default user
+        BootstrapService.getInstance().defaultUser();
+
+        //Stopping DB
+        //BootstrapService.getInstance().stopDb();
+
         //Public Resources
         staticFiles.location("/public");
-
 
         get("/", (request, response) -> {
             Map<String, Object> values = new HashMap<>();

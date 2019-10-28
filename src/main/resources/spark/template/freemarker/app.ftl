@@ -77,26 +77,39 @@
                                 <div class="row">
                                   <div class="col">
                                       <div class="md-form form-sm">
-                                          <input type="text" id="inputSMEx" class="pubTitle form-control form-control-sm" name="name-article">
+                                          <input type="text" id="inputSMEx" class="pubTitle form-control form-control-sm name-article" name="name-article">
                                           <label for="inputSMEx">Título</label>
                                         </div>
                                   </div>
                                   <div class="col">
                                       <div class="md-form form-sm">
-                                          <input type="text" id="inputSMEx" class="pubPublication form-control form-control-sm">
+                                          <input type="text" id="inputSMEx" class="pubPublication form-control form-control-sm tags-input">
                                           <label for="inputSMEx">Etiquetas</label>
                                         </div>
                                   </div>
                                 </div>
+                                  <div class="row mb-2">
+                                      <div class="col-2">
+                                          Tags:
+
+                                      </div>
+                                      <div class="col-10">
+                                          <div class="tags">
+
+
+                                          </div>
+
+                                      </div>
+                                  </div>
                                    
-                                  <textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                                  <textarea class="form-control exampleFormControlTextarea5" id="exampleFormControlTextarea5" rows="3" name="textArticle"></textarea>
                                 </div>
                                      <!--Form for article to submit-->
                           </div>
                       </div>
                       <div class="btn-toolbar justify-content-between float-right">
                           <div class="btn-group">
-                              <button type="submit" class="btn btn-primary">Publicar</button>
+                              <a type="submit" class="btn btn-primary" id="postArticle" href="">Publicar</a>
                           </div>
                           
                       </div>

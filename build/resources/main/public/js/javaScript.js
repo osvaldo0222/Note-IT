@@ -1,17 +1,54 @@
+$(document).on('click','#editUser',function () {
+
+    console.log("PEPE")
+    var curRow = $(this).closest('tr');
+    var username = curRow.find('td:eq(0)').text();
+
+    var name = curRow.find('td:eq(1)').text();
+
+    var author = curRow.find('td:eq(2)').text();
+
+    var admin = curRow.find('td:eq(3)').text();
+
+
+
+    $('#modalListUser').modal('hide')
+    $('#titleModalRegister-update').empty()
+    $('#titleModalRegister-update').text('Editar Usuario')
+    $('.input-full-name-modal-register-update').attr('readonly', true);
+    $('.input-full-name-modal-register-update').attr('value', username);
+    $('label.input-full-name-modal-register-update').attr('class','active')
+    $('#register-update').attr('action','/editUser')
+    $('.name-input').attr('value',name)
+    $('label.name-input').attr('class','active')
+    if(author == "true"){
+        $('#materialUncheckedAuthor').attr('value',true);
+        $('#materialUncheckedAuthor').prop('checked',true);
+    }else{
+        $('#materialUncheckedAuthor').attr('value',false);
+        $('#materialUncheckedAuthor').prop('checked',false);
+
+    }
+    if(admin == "true"){
+        $('#materialUncheckedAdmin').attr('value',true);
+        $('#materialUncheckedAdmin').prop('checked',true);
+    }else{
+        $('#materialUncheckedAdmin').attr('value',false);
+        $('#materialUncheckedAdmin').prop('checked',false);
+
+    }
+
+})
+listUser()
 $(document).ready(function(){
     var data;
 
     tags()
     submitArticle()
 
-    $( "#editUser" ).click(function() {
-        $('#modalListUser').modal('hide')
-        $('#titleModalRegister-update').empty()
-        $('#titleModalRegister-update').text('Editar Usuario')
-        $('.input-full-name-modal-register-update').attr('readonly', true);
-        $('#register-update').attr('action','/editUser')
+    var array = []
 
-      });
+
 
       $( "#regiter-user-bar" ).click(function() {
           checkBox()
@@ -21,12 +58,20 @@ $(document).ready(function(){
         $('#register-update').attr('action','/registerUser');
         $('#materialUncheckedAuthor').attr('value',false);
         $('#materialUncheckedAdmin').attr('value',false);
+        $('#materialUncheckedAdmin').prop('checked',false);
+        $('#materialUncheckedAuthor').prop('checked',false);
+        $('.name-input').attr('value',"");
+        $('.input-full-name-modal-register-update').attr('value', "");
+
       });
 
       $('#deleteModalConfirm').click(function(){
         $('#modalListUser').modal('hide')
 
       })
+
+
+
 
 })
 function checkBox() {
@@ -106,3 +151,32 @@ function submitArticle() {
     })
 
 }
+function listUser() {
+
+        $('#list-user').click(function () {
+            $.get("/listUser",function (data) {
+                var x = JSON.parse(data)
+                var table = document.getElementById("listUsers");
+                $('tbody').remove();
+                for(var i = 0;i<x.users.length;i++){
+                    var row = table.insertRow(i);
+                    var username = row.insertCell(0);
+                    var name = row.insertCell(1);
+                    var author = row.insertCell(2);
+                    var admin = row.insertCell(3);
+                    var update = row.insertCell(4);
+                    var trash = row.insertCell(5);
+
+
+                    username.innerHTML = x.users[i].username;
+                    name.innerHTML = x.users[i].name;
+                    author.innerHTML = x.users[i].author;
+                    admin.innerHTML = x.users[i].administrator;
+                    update.innerHTML = "<a class=\"editUser\" id=\"editUser\" data-toggle=\"modal\" data-target=\"#RegisterUserModal\"><i class=\"fas fa-edit\"></i></a>"
+                    trash.innerHTML = "<a  id=\"deleteModalConfirm\" data-toggle=\"modal\" data-target=\"#modalConfirmDelete\"><i class=\"fas fa-times\"></i></a>"
+                }
+            })
+
+        })
+}
+

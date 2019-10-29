@@ -18,15 +18,44 @@
 </head>
 
 <body>
+<div class="c">
+    <a class="editUser" id="editUser" data-toggle="modal" data-target="#RegisterUserModal"><i class="fas fa-edit"></i>SOMETH</a>
+
+</div>
 
   <!-- Start your project here-->
-   
+
+  <#if !(user??)>
+
+      <nav class="navbar navbar-dark  info-color fixed-top ">
+          <a class="navbar-brand" href="#">NoteIT</a>
+          <form class="form-inline my-1">
+              <div class="md-form form-sm my-0 ml-auto">
+                  <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search"
+                         aria-label="Search">
+              </div>
+              <button class="btn btn-outline-white btn-sm my-0" type="submit">Buscar </button>
+          </form>
+          <a href="login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
+
+      </nav>
+      <style>
+          #firstRow{
+              margin-top: 100px;
+          }
+      </style>
+
+  </#if>
 
 
-  <div class="container-fluid gedf-wrapper">
+  <div class="container-fluid gedf-wrapper" id="firstRow">
+
       <div class="row">
-          <div class="col-md-3 ">
+
+
+          <div class="col-md-3 " id="">
               <div class=" sticky-top" id="right-column">
+                  <#if user??>
                 <div class="row">
                   <div class="col-md-12">
                       <div>
@@ -34,6 +63,14 @@
                            </div>
                   </div>
                 </div>
+                  <div class="row">
+                      <div class="col">
+                         <#if user??>
+                             ${user.username}
+                         </#if>
+
+                      </div>
+                  </div>
                 <div class="row">
                   <div class="col-md-11">
                    
@@ -41,24 +78,27 @@
                            
                           <a href="#" class="list-group-item   waves-effect" id="regiter-user-bar" data-toggle="modal" data-target="#RegisterUserModal">
                             <i class="fas fa-user-plus mr-3"></i>Registrar Usuario</a>
-                          <a href="#" class="list-group-item   waves-effect" data-toggle="modal" data-target="#modalListUser">
+                          <a href="#" class="list-group-item   waves-effect" data-toggle="modal" data-target="#modalListUser" id="list-user">
                             <i class="fas fa-list mr-3"></i>Listar Usuario</a>
                           <a href="#" class="list-group-item   waves-effect">
                             <i class="fas fa-newspaper mr-3"></i>Listar Articulos</a>
-                          
+                          <a href="/closeSession" class="list-group-item   waves-effect">
+                              <i class="fas fa-newspaper mr-3"></i>Log-out</a>
                         </div>
-
                   </div>
                 </div>
-                 
-                 
-                   
-                 
+                  </#if>
               </div>
           </div>
+
+
+
+
           <div class="col-md-6 gedf-main">
 
               <!--- \\\\\\\Post-->
+              <#if user??>
+
               <div class="card gedf-card">
                   <div class="card-header">
                       <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -116,6 +156,8 @@
                   </div>
                   <!--Input field for post-->
               </div>
+
+              </#if>
               <!-- Post /////-->
 
               <!--- \\\\\\\Post model-->
@@ -165,6 +207,51 @@
                   </div>
               </div>
               <!-- Post model /////-->
+              <div class="card gedf-card">
+                  <div class="card-header">
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="d-flex justify-content-between align-items-center">
+                              <div class="mr-2">
+                                  <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                              </div>
+                              <div class="ml-2">
+                                  <div class="h5 m-0">Username</div>
+                                  <div class="h7 text-muted">Username name</div>
+                              </div>
+                          </div>
+                          <div>
+                              <div class="dropdown">
+                                  <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fa fa-ellipsis-h"></i>
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                      <div class="h6 dropdown-header">Modificaciones</div>
+                                      <a class="dropdown-item" href="#">Editar artículo</a>
+                                      <a class="dropdown-item" href="#">Eliminar artículo</a>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="card-body">
+                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Publication date</div>
+                      <a class="card-link" href="#">
+                          <h5 class="card-title">Titulo de articulo</h5>
+                      </a>
+
+                      <p class="card-text">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
+                          sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                      </p>
+                  </div>
+                  <div class="card-footer">
+                      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
+                      <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
+
+                  </div>
+              </div>
 
  
 
@@ -251,7 +338,7 @@
 
 
     <!-- Modal: modalCart -->
-<div class="modal fade" id="modalListUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalListUser" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
@@ -265,29 +352,13 @@ aria-hidden="true">
     <!--Body-->
     <div class="modal-body">
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Nombre</th>
-            <th>Password</th>
-            <th>Autor</th>
-            <th>Administrador</th>
-            <th>Modificar</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>garco</th>
-            <td>edgar garcia </td>
-            
-            <td>Password</td>
-            <th>Checked</th>
-            <th>checked</th>
-            <td class="editUser" id="editUser" data-toggle="modal" data-target="#RegisterUserModal"><a><i class="fas fa-edit"></i></a></td>
-            <td><a  id="deleteModalConfirm" data-toggle="modal" data-target="#modalConfirmDelete"><i class="fas fa-times"></i></a></td>
-          </tr>
+
+      <table class="table table-hover" id="listUsers">
+
+
+        <tbody class="rows-in-table">
+
+
           
         </tbody>
       </table>
@@ -327,16 +398,16 @@ aria-hidden="true">
       </div>
       <div class="modal-body">
           <div class="md-form">
-              <input type="text" id="inputMDEx" class="form-control input-full-name-modal-register-update" name="username">
-              <label for="inputMDEx">Nombre de usuario</label>
+              <input type="text" id="inputMDEx" class="form-control input-full-name-modal-register-update" name="username" required>
+              <label for="inputMDEx" class="input-full-name-modal-register-update">Nombre de usuario</label>
             </div>
           <div class="md-form">
-              <input type="text" id="inputMDEx" class="form-control" name="name">
-              <label for="inputMDEx">Nombre completo</label>
+              <input type="text" id="inputMDEx" class="form-control name-input" name="name" required>
+              <label for="inputMDEx" class="name-input">Nombre completo</label>
             </div>
             <div class="md-form">
-                <input type="text" id="inputMDEx" class="form-control" name="password">
-                <label for="inputMDEx">Password</label>
+                <input type="text" id="inputMDEx" class="form-control password-input" name="password" required>
+                <label for="inputMDEx" class="password-input">Password</label>
               </div>
                
                 <!-- Material unchecked -->
@@ -415,6 +486,7 @@ aria-hidden="true">
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <script type="text/javascript" src="js/javaScript.js"></script>
+<script type="text/javascript" src="js/listUsers.js"></script>
 </body>
 
 </html>

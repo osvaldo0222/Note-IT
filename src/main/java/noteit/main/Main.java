@@ -5,6 +5,8 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
+import noteit.controllers.Authentication;
+import noteit.controllers.Filter;
 import noteit.controllers.Information;
 import noteit.services.BootstrapService;
 import spark.ModelAndView;
@@ -16,6 +18,7 @@ import javax.persistence.Persistence;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("mamaguevo");
         //Starting DB
         BootstrapService.getInstance().startDb();
 
@@ -27,13 +30,13 @@ public class Main {
 
         //Public Resources
         staticFiles.location("/public");
+        (new Authentication()).authentication();
+        (new Filter()).filters();
         (new Information()).informationControllers();
 
 
-        get("/", (request, response) -> {
-            Map<String, Object> values = new HashMap<>();
-            return renderFreemarker(values, "/app.ftl");
-        });
+
+
 
 
 

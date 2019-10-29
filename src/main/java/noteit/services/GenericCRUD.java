@@ -110,8 +110,8 @@ public class GenericCRUD<T> {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         try {
-            T entidad = em.find(entityClass, entityID);
-            em.remove(entidad);
+            T entity = em.find(entityClass, entityID);
+            em.remove(entity);
             em.getTransaction().commit();
         }catch (Exception ex){
             em.getTransaction().rollback();

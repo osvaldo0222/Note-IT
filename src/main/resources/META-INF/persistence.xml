@@ -9,6 +9,7 @@
         <class>noteit.blog.Tag</class>
         <class>noteit.blog.Article</class>
         <class>noteit.blog.Comment</class>
+        <class>noteit.blog.LikeArticle</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/Note-IT" />
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

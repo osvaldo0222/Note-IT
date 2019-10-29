@@ -1,12 +1,16 @@
 package noteit.main;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
+import noteit.blog.Article;
+import noteit.blog.Comment;
+import noteit.blog.Tag;
+import noteit.blog.User;
 import noteit.controllers.Information;
-import noteit.services.BootstrapService;
+import noteit.controllers.Template;
+import noteit.services.*;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 import org.json.*;

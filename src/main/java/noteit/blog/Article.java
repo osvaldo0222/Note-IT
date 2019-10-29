@@ -2,6 +2,7 @@ package noteit.blog;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,18 +18,18 @@ public class Article implements Serializable {
     private Date date;
     @OneToMany(mappedBy = "article")
     private List<Comment> commentList;
-    @OneToMany
+    @ManyToMany
     private List<Tag> tagList;
+    @OneToMany(mappedBy = "article")
+    private List<LikeArticle> likeList;
 
     public Article() {}
 
-    public Article(String title, String body, User author, Date date, List<Comment> commentList, List<Tag> tagList) {
+    public Article(String title, String body, User author, Date date) {
         this.title = title;
         this.body = body;
         this.author = author;
         this.date = date;
-        this.commentList = commentList;
-        this.tagList = tagList;
     }
 
     public long getId() {
@@ -85,5 +86,31 @@ public class Article implements Serializable {
 
     public void setTagList(List<Tag> tagList) {
         this.tagList = tagList;
+    }
+
+    public List<LikeArticle> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<LikeArticle> likeList) {
+        this.likeList = likeList;
+    }
+
+    public long getNumbersOfLikes(){ return (likeList == null)?0:likeList.size(); }
+
+    public void addTag(Tag tag){
+        if (tagList == null) {
+            tagList = new ArrayList<>();
+        }
+        boolean exist = false;
+        for (Tag aux : tagList) {
+            if (aux.getTag().equalsIgnoreCase(tag.getTag())) {
+                exist = true;
+                break;
+            }
+        }
+        if (!exist){
+            tagList.add(tag);
+        }
     }
 }

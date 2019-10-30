@@ -195,14 +195,12 @@
                                       <div>
                                           <#list article.tagList as artTag >
                                               <span class="badge badge-pill badge-info ml-1">${artTag.tag}</span>
-
                                           </#list>
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
-                                      <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
-
+                                      <a class="card-link" id="like" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
+                                      <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
                                   </div>
                               </div>
                           </#list>

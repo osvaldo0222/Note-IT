@@ -39,5 +39,13 @@ public class Filter {
                 }
             }
         });
+
+        before("/likePost", (request, response) -> {
+            User user = request.session().attribute("user");
+            if (user == null) {
+                response.redirect("/login");
+                halt(300);
+            }
+        });
     }
 }

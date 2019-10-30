@@ -146,7 +146,8 @@ function submitArticle() {
         $.post("/registerArticle",{title:title,article:article,json:data},
             function () {
             })
-        location.reload()
+        alert("q")
+        history.go(0);
     })
 
 }

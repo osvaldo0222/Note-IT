@@ -138,7 +138,7 @@
                       </div>
                       <div class="btn-toolbar justify-content-between float-right">
                           <div class="btn-group">
-                              <a type="submit" class="btn btn-primary" id="postArticle" href="/" >Publicar</a>
+                              <a type="submit" class="btn btn-primary" id="postArticle" href="" >Publicar</a>
                           </div>
 
                       </div>
@@ -185,7 +185,7 @@
                                   </div>
                                   <div class="card-body">
                                       <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>${article.date}</div>
-                                      <a class="card-link" href="#">
+                                      <a class="card-link" href="/seeArticle/${article.id}">
                                           <h5 class="card-title">${article.title}</h5>
                                       </a>
 

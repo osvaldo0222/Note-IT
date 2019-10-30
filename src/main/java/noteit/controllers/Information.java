@@ -24,6 +24,13 @@ import static spark.Spark.*;
 
 public class Information {
     public void informationControllers(){
+        get("/seeArticle/:id",(request, response) -> {
+            User user = request.session().attribute("user");
+            Map<String, Object> values = new HashMap<>();
+            values.put("article",ArticleService.getInstance().find(Long.parseLong(request.params("id"))));
+            values.put("user",user);
+            return Template.renderFreemarker(values,"/article.ftl");
+        });
         get("/listUser",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
             Gson gson = new GsonBuilder().create();

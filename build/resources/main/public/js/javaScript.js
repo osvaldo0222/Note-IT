@@ -137,6 +137,8 @@ function tags(){
     })
     return k;
 }
+
+
 function submitArticle() {
     $('#postArticle').click(function () {
         var title = $('input.name-article').val()
@@ -149,22 +151,26 @@ function submitArticle() {
 
 }
 function listUser() {
-
         $('#list-user').click(function () {
             $.get("/listUser",function (data) {
                 var x = JSON.parse(data)
                 var table = document.getElementById("listUsers");
                 $('tbody').remove();
+                var header = table.insertRow(0);
+                header.insertCell(0).innerHTML = "<strong>Usuario</strong>";
+                header.insertCell(1).innerHTML = "<strong>Nombre</strong>";
+                header.insertCell(2).innerHTML = "<strong>Autor</strong>";
+                header.insertCell(3).innerHTML = "<strong>Administrador</strong>";
+                header.insertCell(4).innerHTML = "<strong>Editar</strong>";
+                header.insertCell(5).innerHTML = "<strong>Eliminar</strong>";
                 for(var i = 0;i<x.users.length;i++){
-                    var row = table.insertRow(i);
+                    var row = table.insertRow(i + 1);
                     var username = row.insertCell(0);
                     var name = row.insertCell(1);
                     var author = row.insertCell(2);
                     var admin = row.insertCell(3);
                     var update = row.insertCell(4);
                     var trash = row.insertCell(5);
-
-
                     username.innerHTML = x.users[i].username;
                     name.innerHTML = x.users[i].name;
                     author.innerHTML = x.users[i].author;
@@ -173,7 +179,6 @@ function listUser() {
                     trash.innerHTML = "<a  id=\"deleteModalConfirm\" data-toggle=\"modal\" data-target=\"#modalConfirmDelete\"><i class=\"fas fa-times\"></i></a>"
                 }
             })
-
         })
 }
 

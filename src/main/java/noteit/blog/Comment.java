@@ -1,5 +1,7 @@
 package noteit.blog;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,6 +10,7 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Type(type = "text")
     private String comment;
     @OneToOne
     private User author;

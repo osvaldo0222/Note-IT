@@ -5,9 +5,11 @@ import com.google.gson.GsonBuilder;
 import jdk.nashorn.internal.ir.ReturnNode;
 import net.bytebuddy.asm.Advice;
 import noteit.blog.Article;
+import noteit.blog.LikeArticle;
 import noteit.blog.Tag;
 import noteit.blog.User;
 import noteit.services.ArticleService;
+import noteit.services.LikeService;
 import noteit.services.UserService;
 import org.graalvm.compiler.lir.LIRInstruction;
 import org.json.JSONArray;
@@ -22,8 +24,6 @@ import static spark.Spark.*;
 
 public class Information {
     public void informationControllers(){
-
-
         get("/listUser",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
             Gson gson = new GsonBuilder().create();
@@ -33,35 +33,16 @@ public class Information {
             return jsonFromMap;
         });
 
-
-
-        get("/closeSession",(request, response) -> {
-            Session session = request.session();
-            if (session != null){
-                session.invalidate();
-                response.redirect("/");
-
-            }
-            return "";
-        });
-
         get("/",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
             User user = request.session().attribute("user");
             if(user != null){
                 values.put("user",user);
                 values.put("users",UserService.getInstance().findAll());
-
             }
             values.put("articles",ArticleService.getInstance().findAll());
             return Template.renderFreemarker(values,"/app.ftl");
         });
-
-        get("/login",(request, response) -> {
-            return Template.renderFreemarker(null,"/login.ftl");
-        });
-
-
 
         post("/registerUser",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
@@ -113,6 +94,14 @@ public class Information {
             return "";
         });
 
+        get("/likePost", (request, response) -> {
+            User user = request.session().attribute("user");
+            Article article = ArticleService.getInstance().find(Long.parseLong(request.queryParams("article-id")));
+            if (user != null && article != null) {
+                LikeService.getInstance().create(new LikeArticle(user, article));
+            }
+            return "";
+        });
     }
 
 }

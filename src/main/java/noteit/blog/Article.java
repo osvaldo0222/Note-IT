@@ -1,5 +1,9 @@
 package noteit.blog;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    @Type(type = "text")
     private String body;
     @OneToOne
     private User author;
@@ -21,6 +26,7 @@ public class Article implements Serializable {
     @ManyToMany
     private List<Tag> tagList;
     @OneToMany(mappedBy = "article")
+    @Fetch(FetchMode.JOIN)
     private List<LikeArticle> likeList;
 
     public Article() {}
@@ -112,5 +118,16 @@ public class Article implements Serializable {
         if (!exist){
             tagList.add(tag);
         }
+    }
+
+    public LikeArticle getUserLike(String username){
+        LikeArticle like = null;
+        for (LikeArticle likeArticle : likeList) {
+            if (likeArticle.getUserLike().getUsername().equalsIgnoreCase(username)){
+                like = likeArticle;
+                break;
+            }
+        }
+        return like;
     }
 }

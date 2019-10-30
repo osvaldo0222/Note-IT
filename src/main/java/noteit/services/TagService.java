@@ -23,6 +23,7 @@ public class TagService extends GenericCRUD<Tag> {
         Query query = em.createQuery("select t from Tag t where t.tag = :tag");
         query.setParameter("tag", tag.toLowerCase());
         List<Tag> list = query.getResultList();
+        em.close();
         return (list.size() == 0)?null:list.get(0);
     }
 }

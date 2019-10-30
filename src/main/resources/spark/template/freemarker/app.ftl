@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Note-IT</title>
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+      <!-- Bootstrap core CSS -->
+      <link href="/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Material Design Bootstrap -->
+      <link href="/css/mdb.min.css" rel="stylesheet">
+      <!-- Your custom styles (optional) -->
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="/css/mdb.min.css" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-
-  <link href="css/style.css" rel="stylesheet">
-</head>
+      <link href="/css/style.css" rel="stylesheet">
+    </head>
 
 <body>
-<div class="c">
-    <a class="editUser" id="editUser" data-toggle="modal" data-target="#RegisterUserModal"><i class="fas fa-edit"></i>SOMETH</a>
-
-</div>
-
   <!-- Start your project here-->
-
   <#if !(user??)>
-
       <nav class="navbar navbar-dark  info-color fixed-top ">
-          <a class="navbar-brand" href="#">NoteIT</a>
+          <a class="navbar-brand" href="#"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
           <form class="form-inline my-1">
               <div class="md-form form-sm my-0 ml-auto">
-                  <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search"
-                         aria-label="Search">
+                  <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" aria-label="Search">
               </div>
               <button class="btn btn-outline-white btn-sm my-0" type="submit">Buscar </button>
           </form>
           <a href="login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
-
       </nav>
       <style>
-          #firstRow{
+          #firstRow {
               margin-top: 100px;
           }
       </style>
-
   </#if>
 
 
@@ -59,7 +48,7 @@
                 <div class="row">
                   <div class="col-md-12">
                       <div>
-                          <img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png">  <span class="ml-1 blog">Blog-ISC-415</span>                 
+                          <img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png">  <span class="ml-1 blog">Note-IT</span>
                            </div>
                   </div>
                 </div>
@@ -265,8 +254,7 @@
 
 
     <!-- Modal: modalCart -->
-<div class="modal fade" id="modalListUser" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
+<div class="modal fade" id="modalListUser" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
     <!--Header-->
@@ -278,18 +266,9 @@ aria-hidden="true">
     </div>
     <!--Body-->
     <div class="modal-body">
-
-
       <table class="table table-hover" id="listUsers">
-
-
-        <tbody class="rows-in-table">
-
-
-          
-        </tbody>
+        <tbody class="rows-in-table"></tbody>
       </table>
-
     </div>
     <!--Footer-->
     <div class="modal-footer">
@@ -333,7 +312,7 @@ aria-hidden="true">
               <label for="inputMDEx" class="name-input">Nombre completo</label>
             </div>
             <div class="md-form">
-                <input type="text" id="inputMDEx" class="form-control password-input" name="password" required>
+                <input type="password" id="inputMDEx" class="form-control password-input" name="password" required>
                 <label for="inputMDEx" class="password-input">Password</label>
               </div>
                
@@ -397,14 +376,9 @@ aria-hidden="true">
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: modalConfirmDelete-->
-
-
   <!-- Start your project here-->
-
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="js/popper.min.js"></script>
@@ -413,7 +387,6 @@ aria-hidden="true">
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <script type="text/javascript" src="js/javaScript.js"></script>
-<script type="text/javascript" src="js/listUsers.js"></script>
+  <script type="text/javascript" src="js/listUsers.js"></script>
 </body>
-
 </html>

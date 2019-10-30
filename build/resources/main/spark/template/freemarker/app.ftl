@@ -199,7 +199,7 @@
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a class="card-link" id="like" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
+                                      <a class="card-link" id="like" value="${article.id}" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
                                       <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
                                   </div>
                               </div>
@@ -386,5 +386,14 @@
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <script type="text/javascript" src="js/javaScript.js"></script>
   <script type="text/javascript" src="js/listUsers.js"></script>
+  <script>
+      var a = document.getElementsByClassName("card-text");
+      var i;
+      for (i = 0; i < a.length; i++) {
+          if (a[i].innerText.length > 70) {
+              a[i].innerText = a[i].innerText.slice(0, 67) + "...";
+          };
+      };
+  </script>
 </body>
 </html>

@@ -45,6 +45,11 @@ public class Filter {
             if (user == null) {
                 response.redirect("/login");
                 halt(300);
+            } else {
+                if (request.queryParams("idArticle") == null) {
+                    response.redirect("/");
+                    halt();
+                }
             }
         });
     }

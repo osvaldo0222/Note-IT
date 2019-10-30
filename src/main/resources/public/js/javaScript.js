@@ -141,7 +141,7 @@ function submitArticle() {
     $('#postArticle').click(function () {
         var title = $('input.name-article').val()
         var article = $('textarea.exampleFormControlTextarea5').val()
-        $.get("/registerArticle",{title:title,article:article,json:data},
+        $.post("/registerArticle",{title:title,article:article,json:data},
             function () {
             })
         location.reload()

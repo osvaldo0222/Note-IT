@@ -95,7 +95,7 @@ public class Information {
             return "";
         });
 
-        get("/registerArticle",(request, response) -> {
+        post("/registerArticle",(request, response) -> {
             User user = request.session().attribute("user");
 
             String title = request.queryParams("title");

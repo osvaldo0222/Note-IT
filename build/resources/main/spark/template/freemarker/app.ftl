@@ -105,7 +105,7 @@
                           <li class="nav-item">
                               <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Crear Publicación</a>
                           </li>
-                           
+
                       </ul>
                   </div>
                   <div class="card-body">
@@ -141,7 +141,7 @@
 
                                       </div>
                                   </div>
-                                   
+
                                   <textarea class="form-control exampleFormControlTextarea5" id="exampleFormControlTextarea5" rows="3" name="textArticle"></textarea>
                                 </div>
                                      <!--Form for article to submit-->
@@ -151,7 +151,7 @@
                           <div class="btn-group">
                               <a type="submit" class="btn btn-primary" id="postArticle" href="">Publicar</a>
                           </div>
-                          
+
                       </div>
                   </div>
                   <!--Input field for post-->
@@ -160,98 +160,69 @@
               </#if>
               <!-- Post /////-->
 
-              <!--- \\\\\\\Post model-->
-              <div class="card gedf-card">
-                  <div class="card-header">
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex justify-content-between align-items-center">
-                              <div class="mr-2">
-                                  <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                              </div>
-                              <div class="ml-2">
-                                  <div class="h5 m-0">Username</div>
-                                  <div class="h7 text-muted">Username name</div>
-                              </div>
-                          </div>
-                          <div>
-                              <div class="dropdown">
-                                  <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <i class="fa fa-ellipsis-h"></i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                      <div class="h6 dropdown-header">Modificaciones</div>
-                                      <a class="dropdown-item" href="#">Editar artículo</a>
-                                      <a class="dropdown-item" href="#">Eliminar artículo</a>
-                                      
+              <div class="row">
+                  <div class="col-12">
+                      <!--- \\\\\\\Post model-->
+                      <#if articles??>
+
+                          <#list articles as article>
+                              <div class="card gedf-card">
+                                  <div class="card-header">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="d-flex justify-content-between align-items-center">
+                                              <div class="mr-2">
+                                                  <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                              </div>
+                                              <div class="ml-2">
+                                                  <div class="h5 m-0">${article.author.name}</div>
+                                                  <div class="h7 text-muted">${article.author.username}</div>
+                                              </div>
+                                          </div>
+                                          <div>
+                                              <div class="dropdown">
+                                                  <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <i class="fa fa-ellipsis-h"></i>
+                                                  </button>
+                                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                                      <div class="h6 dropdown-header">Modificaciones</div>
+                                                      <a class="dropdown-item" href="#">Editar artículo</a>
+                                                      <a class="dropdown-item" href="#">Eliminar artículo</a>
+
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                                  <div class="card-body">
+                                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>${article.date}</div>
+                                      <a class="card-link" href="#">
+                                          <h5 class="card-title">${article.title}</h5>
+                                      </a>
+
+                                      <p class="card-text">
+                                          ${article.body}
+                                      </p>
+                                      <div>
+                                          <#list article.tagList as artTag >
+                                              <span class="badge badge-pill badge-info ml-1">${artTag.tag}</span>
+
+                                          </#list>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer">
+                                      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
+                                      <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
+
                                   </div>
                               </div>
-                          </div>
-                      </div>
+                          </#list>
 
-                  </div>
-                  <div class="card-body">
-                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Publication date</div>
-                      <a class="card-link" href="#">
-                          <h5 class="card-title">Titulo de articulo</h5>
-                      </a>
+                      </#if>
 
-                      <p class="card-text">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                          sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                      </p>
-                  </div>
-                  <div class="card-footer">
-                      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
-                      <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
-                      
                   </div>
               </div>
               <!-- Post model /////-->
-              <div class="card gedf-card">
-                  <div class="card-header">
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex justify-content-between align-items-center">
-                              <div class="mr-2">
-                                  <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                              </div>
-                              <div class="ml-2">
-                                  <div class="h5 m-0">Username</div>
-                                  <div class="h7 text-muted">Username name</div>
-                              </div>
-                          </div>
-                          <div>
-                              <div class="dropdown">
-                                  <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <i class="fa fa-ellipsis-h"></i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                      <div class="h6 dropdown-header">Modificaciones</div>
-                                      <a class="dropdown-item" href="#">Editar artículo</a>
-                                      <a class="dropdown-item" href="#">Eliminar artículo</a>
-
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-
-                  </div>
-                  <div class="card-body">
-                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Publication date</div>
-                      <a class="card-link" href="#">
-                          <h5 class="card-title">Titulo de articulo</h5>
-                      </a>
-
-                      <p class="card-text">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                          sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                      </p>
-                  </div>
-                  <div class="card-footer">
-                      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
-                      <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
-
-                  </div>
-              </div>
 
  
 
@@ -259,51 +230,7 @@
               
               <!-- Post /////-->
                 <!--- \\\\\\\Post model-->
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Username</div>
-                                    <div class="h7 text-muted">Username name</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Modificaciones</div>
-                                        <a class="dropdown-item" href="#">Editar artículo</a>
-                                        <a class="dropdown-item" href="#">Eliminar artículo</a>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-  
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Publication date</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">Titulo de articulo</h5>
-                        </a>
-  
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                            sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Me gusta</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
-                        
-                    </div>
-                </div>
+
                 <!-- Post model /////-->
 
 

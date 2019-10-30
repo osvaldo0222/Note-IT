@@ -38,7 +38,8 @@ public class ArticleService extends GenericCRUD<Article> {
                 tag.setTag(tag.getTag().toLowerCase());
                 TagService.getInstance().create(tag);
             } else {
-                tag = aux;
+                tag.setId(aux.getId());
+                tag.setTag(aux.getTag());
             }
         }
     }

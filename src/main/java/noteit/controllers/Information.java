@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import jdk.nashorn.internal.ir.ReturnNode;
 import net.bytebuddy.asm.Advice;
 import noteit.blog.Article;
+import noteit.blog.Tag;
 import noteit.blog.User;
 import noteit.services.ArticleService;
 import noteit.services.UserService;
@@ -50,6 +51,7 @@ public class Information {
             if(user != null){
                 values.put("user",user);
                 values.put("users",UserService.getInstance().findAll());
+                values.put("articles",ArticleService.getInstance().findAll());
             }
             return Template.renderFreemarker(values,"/app.ftl");
         });
@@ -101,15 +103,11 @@ public class Information {
             java.util.Date date = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             JSONArray json = new JSONArray(jsonArray);
-            /*Article article1 = new Article();
-            article1.setTitle(title);
-            article1.setBody(articleBody);
-            article1.setAuthor(user);
-            article1.setDate(sqlDate);*/
-           // article1.se
-
-
-            //ArticleService.getInstance().create();
+            Article article1 = new Article(title,articleBody,user,sqlDate);
+            for (int i =0;i<json.length();i++){
+                article1.addTag(new Tag(json.get(i).toString()));
+            }
+            ArticleService.getInstance().create(article1);
             response.redirect("/");
             return "";
         });

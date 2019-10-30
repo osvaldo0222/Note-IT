@@ -47,8 +47,10 @@ public class ArticleService extends GenericCRUD<Article> {
     @Override
     public List<Article> findAll() {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select distinct a from Article a inner join fetch a.tagList");
-        return query.getResultList();
+        Query query = em.createQuery("select distinct a from Article a inner join fetch a.tagList order by a.date desc, a.id desc");
+        List<Article> articles = query.getResultList();
+        em.close();
+        return articles;
     }
 
     public Article find(long id){
@@ -56,6 +58,7 @@ public class ArticleService extends GenericCRUD<Article> {
         Query query = em.createQuery("select a from Article a inner join fetch a.tagList where a.id = :id");
         query.setParameter("id", id);
         List<Article> list = query.getResultList();
+        em.close();
         return (list.size() == 0)?null:list.get(0);
     }
 }

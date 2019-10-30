@@ -137,6 +137,8 @@ function tags(){
     })
     return k;
 }
+
+
 function submitArticle() {
     $('#postArticle').click(function () {
         var title = $('input.name-article').val()

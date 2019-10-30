@@ -18,30 +18,22 @@ import javax.persistence.Persistence;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("mamaguevo");
         //Starting DB
         BootstrapService.getInstance().startDb();
 
         //Creating default user
         BootstrapService.getInstance().defaultUser();
 
-        //Stopping DB
-        //BootstrapService.getInstance().stopDb();
-
         //Public Resources
         staticFiles.location("/public");
-        (new Authentication()).authentication();
+
+        //Filter Controllers
         (new Filter()).filters();
+
+        //Authentication Controllers
+        (new Authentication()).authentication();
+
+        //Information Controllers
         (new Information()).informationControllers();
-
-
-
-
-
-
-
-    }
-    public static String renderFreemarker(Map<String, Object> model, String templatePath) {
-        return new FreeMarkerEngine().render(new ModelAndView(model, templatePath));
     }
 }

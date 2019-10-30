@@ -22,8 +22,6 @@ import static spark.Spark.*;
 
 public class Information {
     public void informationControllers(){
-
-
         get("/listUser",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
             Gson gson = new GsonBuilder().create();
@@ -33,35 +31,16 @@ public class Information {
             return jsonFromMap;
         });
 
-
-
-        get("/closeSession",(request, response) -> {
-            Session session = request.session();
-            if (session != null){
-                session.invalidate();
-                response.redirect("/");
-
-            }
-            return "";
-        });
-
         get("/",(request, response) -> {
             Map<String, Object> values = new HashMap<>();
             User user = request.session().attribute("user");
             if(user != null){
                 values.put("user",user);
                 values.put("users",UserService.getInstance().findAll());
-
             }
             values.put("articles",ArticleService.getInstance().findAll());
             return Template.renderFreemarker(values,"/app.ftl");
         });
-
-        get("/login",(request, response) -> {
-            return Template.renderFreemarker(null,"/login.ftl");
-        });
-
-
 
         post("/registerUser",(request, response) -> {
             Map<String, Object> values = new HashMap<>();

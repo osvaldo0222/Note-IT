@@ -48,7 +48,7 @@
   </#if>
 
 
-  <div class="container-fluid gedf-wrapper" id="firstRow">
+  <div class="con114tainer-fluid gedf-wrapper" id="firstRow">
 
       <div class="row">
 

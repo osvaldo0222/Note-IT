@@ -39,6 +39,22 @@ $(document).on('click','#editUser',function () {
     }
 
 })
+$(document).on('click','#deleteModalConfirmDeleteArticle',function () {
+    $('#modalConfirmDelete p#confirmTitle').empty();
+    $('#modalConfirmDelete p#confirmTitle').text("Eliminar Articulo");
+    $('#messageDelete').text("Seguro de eliminar el articulo ");
+
+
+
+})
+$(document).on('click','#deleteModalConfirm',function () {
+    $('#modalConfirmDelete p#confirmTitle').empty();
+    $('#modalConfirmDelete p#confirmTitle').text("Eliminar Usuario");
+    $('#messageDelete').text("Seguro de eliminar el usuario ")
+
+
+
+})
 listUser()
 submitArticle()
 $(document).ready(function(){
@@ -67,7 +83,7 @@ $(document).ready(function(){
       });
 
       $('#deleteModalConfirm').click(function(){
-        $('#modalListUser').modal('hide')
+        //$('#modalListUser').modal('hide')
 
       })
 

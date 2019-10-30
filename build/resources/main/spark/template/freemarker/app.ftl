@@ -200,6 +200,8 @@
                                   </div>
                                   <div class="card-footer">
                                       <a class="card-link" id="like" value="${article.id}" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
+                                      <a class="card-link" id="dislike" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-down"></i> No me gusta</a>
+
                                       <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
                                   </div>
                               </div>
@@ -349,7 +351,7 @@
     <div class="modal-content text-center">
       <!--Header-->
       <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Eliminar usuario</p>
+        <p class="heading" id="confirmTitle">Eliminar usuario</p>
       </div>
 
       <!--Body-->
@@ -358,7 +360,7 @@
         <i class="fas fa-times fa-4x animated rotateIn"></i>
         <div class="row">
           <div class="col"> 
-            <span>¿Seguro de eliminar el usuario xxxx?</span>
+            <span id="messageDelete"> </span>
           </div>
         </div>
        

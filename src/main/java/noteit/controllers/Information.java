@@ -24,6 +24,11 @@ import static spark.Spark.*;
 
 public class Information {
     public void informationControllers(){
+        get("/deleteArticle/:id",(request, response) -> {
+            ArticleService.getInstance().delete(Long.parseLong(request.params("id")));
+            response.redirect("/");
+            return "";
+        });
         get("/seeArticle/:id",(request, response) -> {
             User user = request.session().attribute("user");
             Map<String, Object> values = new HashMap<>();

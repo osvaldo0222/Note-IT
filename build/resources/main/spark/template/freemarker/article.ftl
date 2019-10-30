@@ -20,7 +20,7 @@
 <!-- Start your project here-->
 <#if !(user??)>
     <nav class="navbar navbar-dark  info-color fixed-top ">
-        <a class="navbar-brand" href="#"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
+        <a class="navbar-brand" href="/"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
         <form class="form-inline my-1">
             <div class="md-form form-sm my-0 ml-auto">
                 <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" aria-label="Search">
@@ -119,7 +119,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                                                     <div class="h6 dropdown-header">Modificaciones</div>
                                                     <a class="dropdown-item" href="#">Editar artículo</a>
-                                                    <a class="dropdown-item" href="#" data-target="#modalConfirmDelete" id="modalConfirmDelete" data-toggle="modal">Eliminar artículo</a>
+                                                    <a class="dropdown-item" id="deleteModalConfirmDeleteArticle" data-toggle="modal" data-target="#modalConfirmDelete" >Eliminar artículo</a>
 
                                                 </div>
                                             </div>
@@ -154,7 +154,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <a class="card-link" id="like" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
-                                    <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
+                                    <a class="card-link" id="dislike" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-down"></i> No me gusta</a>
+
                                 </div>
                             </div>
 
@@ -189,12 +190,24 @@
 
                                 <!-- Quick Reply -->
                                 <div class="form-group mt-4">
-                                    <label for="quickReplyFormComment">Your comment</label>
-                                    <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <a class="card-link" id="like" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-up"></i>Me gusta</a>
 
-                                    <div class="text-center my-4">
-                                        <button class="btn btn-primary btn-sm" type="submit">Comentar</button>
+                                            <a class="card-link" id="dislike" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-down"></i>No me gusta</a>
+
+                                        </div>
                                     </div>
+                                   <div class="row">
+                                       <div class="col-sm-12">
+                                           <label for="quickReplyFormComment">Your comment</label>
+                                           <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
+
+                                           <div class="text-center my-4">
+                                               <button class="btn btn-primary btn-sm" type="submit">Comentar</button>
+                                           </div>
+                                       </div>
+                                   </div>
                                 </div>
 
 
@@ -348,7 +361,7 @@
         <div class="modal-content text-center">
             <!--Header-->
             <div class="modal-header d-flex justify-content-center">
-                <p class="heading">Eliminar usuario</p>
+                <p class="heading" id="confirmTitle">Eliminar usuario</p>
             </div>
 
             <!--Body-->
@@ -357,7 +370,7 @@
                 <i class="fas fa-times fa-4x animated rotateIn"></i>
                 <div class="row">
                     <div class="col">
-                        <span>¿Seguro de eliminar el usuario xxxx?</span>
+                        <span class="messageDelete"> ${article.title}</span>
                     </div>
                 </div>
 
@@ -366,7 +379,7 @@
 
             <!--Footer-->
             <div class="modal-footer flex-center">
-                <a href="" class="btn  btn-outline-danger" type="submit">Si!</a>
+                <a href="/deleteArticle/${article.id}" class="btn  btn-outline-danger" type="submit">Si!</a>
                 <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancelar</a>
             </div>
         </div>

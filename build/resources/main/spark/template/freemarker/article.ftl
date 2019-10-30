@@ -27,7 +27,7 @@
             </div>
             <button class="btn btn-outline-white btn-sm my-0" type="submit">Buscar </button>
         </form>
-        <a href="login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
+        <a href="/login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
     </nav>
     <style>
         #firstRow {
@@ -105,11 +105,13 @@
                                                 <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                             </div>
                                             <div class="ml-2">
-                                                <div class="h5 m-0">${article.author.name}</div>
-                                                <div class="h7 text-muted">${article.author.username}</div>
+                                                <h5 class="card-title">${article.title}</h5>
+                                                <div class="h7 m-0">Por: ${article.author.name}  <div class="text-muted h7 mb-2 float-right"> <i class="fa fa-clock-o"></i>  ${article.date}</div></div>
+                                                <div class="h7 text-muted"><#--${article.author.username}--></div>
                                             </div>
                                         </div>
                                         <div>
+                                            <#if user?? && (user.author == true || user.administrator == true)>
                                             <div class="dropdown">
                                                 <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-ellipsis-h"></i>
@@ -117,24 +119,34 @@
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                                                     <div class="h6 dropdown-header">Modificaciones</div>
                                                     <a class="dropdown-item" href="#">Editar artículo</a>
-                                                    <a class="dropdown-item" href="#">Eliminar artículo</a>
+                                                    <a class="dropdown-item" href="#" data-target="#modalConfirmDelete" id="modalConfirmDelete" data-toggle="modal">Eliminar artículo</a>
 
                                                 </div>
                                             </div>
+                                            </#if>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>${article.date}</div>
-                                    <a class="">
-                                        <h5 class="card-title">${article.title}</h5>
-                                    </a>
 
-                                    <p class="card-text">
-                                        ${article.body}
-                                    </p>
-                                    <div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="card-text">
+                                                ${article.body}
+                                            </p>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class=" float-right">
                                         <#list article.tagList as artTag >
                                             <span class="badge badge-pill badge-info ml-1">${artTag.tag}</span>
                                         </#list>
@@ -152,6 +164,51 @@
                 </div>
             </div>
             <!-- Post model /////-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--Section: Comments-->
+                    <section class="my-5">
+
+                        <!-- Card header -->
+                        <div class="card-header border-0 font-weight-bold">4 comments</div>
+
+                        <div class="media d-block d-md-flex mt-4">
+                            <img class="card-img-64 d-flex mx-auto mb-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg"
+                                 alt="Generic placeholder image">
+                            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                <h5 class="font-weight-bold mt-0">
+                                    <a href="">Miley Steward</a>
+                                    <a href="" class="pull-right">
+                                        <i class="fas fa-reply"></i>
+                                    </a>
+                                </h5>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+                                <!-- Quick Reply -->
+                                <div class="form-group mt-4">
+                                    <label for="quickReplyFormComment">Your comment</label>
+                                    <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
+
+                                    <div class="text-center my-4">
+                                        <button class="btn btn-primary btn-sm" type="submit">Comentar</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <!--Pagination -->
+
+                    </section>
+                    <!--Section: Comments-->
+
+                </div>
+            </div>
 
 
 
@@ -319,14 +376,14 @@
 <!-- Start your project here-->
 <!-- SCRIPTS -->
 <!-- JQuery -->
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<script type="text/javascript" src="js/javaScript.js"></script>
-<script type="text/javascript" src="js/listUsers.js"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/javaScript.js"></script>
+<script type="text/javascript" src="/js/listUsers.js"></script>
 </body>
 </html>

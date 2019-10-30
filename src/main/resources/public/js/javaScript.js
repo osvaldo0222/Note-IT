@@ -183,3 +183,15 @@ function listUser() {
         })
 }
 
+$(document).on('click', '#like',function () {
+        var buttonLike = $(this);
+        var id = buttonLike.attr('value');
+        $.get("/likePost", {idArticle: id},function (data) {
+            if (data == "true") {
+                buttonLike.attr('style', "color: #0b51c5;")
+            } else {
+                buttonLike.attr('style', "color: #90a4ae;")
+            }
+        });
+})
+

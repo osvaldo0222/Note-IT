@@ -102,12 +102,19 @@ public class Information {
         });
 
         get("/likePost", (request, response) -> {
+            boolean status = false;
             User user = request.session().attribute("user");
-            Article article = ArticleService.getInstance().find(Long.parseLong(request.queryParams("article-id")));
+            Article article = ArticleService.getInstance().find(Long.parseLong(request.queryParams("idArticle")));
             if (user != null && article != null) {
-                LikeService.getInstance().create(new LikeArticle(user, article));
+                LikeArticle likeArticle = article.getUserLike(user.getUsername());
+                if (likeArticle == null) {
+                    LikeService.getInstance().create(new LikeArticle(user, article));
+                    status = true;
+                } else {
+                    LikeService.getInstance().delete(likeArticle.getId());
+                }
             }
-            return "";
+            return status;
         });
     }
 

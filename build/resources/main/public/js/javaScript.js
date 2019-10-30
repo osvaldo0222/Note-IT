@@ -40,11 +40,12 @@ $(document).on('click','#editUser',function () {
 
 })
 listUser()
+submitArticle()
 $(document).ready(function(){
     var data;
 
     tags()
-    submitArticle()
+
 
     var array = []
 
@@ -140,14 +141,14 @@ function submitArticle() {
     $('#postArticle').click(function () {
         var title = $('input.name-article').val()
         var article = $('textarea.exampleFormControlTextarea5').val()
-
-        var x = "[uno,dos]"
         $.get("/registerArticle",{title:title,article:article,json:data},
             function () {
 
 
             })
 
+        alert("Page has realoded")
+        location.reload()
     })
 
 }

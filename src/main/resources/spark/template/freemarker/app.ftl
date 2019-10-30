@@ -149,7 +149,7 @@
                       </div>
                       <div class="btn-toolbar justify-content-between float-right">
                           <div class="btn-group">
-                              <a type="submit" class="btn btn-primary" id="postArticle" href="">Publicar</a>
+                              <a type="submit" class="btn btn-primary" id="postArticle" href="/" >Publicar</a>
                           </div>
 
                       </div>

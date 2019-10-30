@@ -51,8 +51,9 @@ public class Information {
             if(user != null){
                 values.put("user",user);
                 values.put("users",UserService.getInstance().findAll());
-                values.put("articles",ArticleService.getInstance().findAll());
+
             }
+            values.put("articles",ArticleService.getInstance().findAll());
             return Template.renderFreemarker(values,"/app.ftl");
         });
 

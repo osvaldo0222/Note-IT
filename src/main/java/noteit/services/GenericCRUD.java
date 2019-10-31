@@ -41,11 +41,6 @@ public class GenericCRUD<T> {
                 try {
                     f.setAccessible(true);
                     Object campValue = f.get(entity);
-                    //
-                    System.out.println("nombre del campo: "+f.getName());
-                    System.out.println("Tipo del campo: "+f.getType().getName());
-                    System.out.println("Valor del campo: "+ campValue);
-                    //
                     return campValue;
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

@@ -202,12 +202,50 @@ function listUser() {
 $(document).on('click', '#like',function () {
         var buttonLike = $(this);
         var id = buttonLike.attr('value');
-        $.get("/likePost", {idArticle: id},function (data) {
-            if (data == "true") {
-                buttonLike.attr('style', "color: #0b51c5;")
-            } else {
-                buttonLike.attr('style', "color: #90a4ae;")
+        $.get("/likePost", {idArticle: id, liked: true},function (data) {
+            switch (data) {
+                case "deleted":
+                    buttonLike.attr('style', "color: #90a4ae;");
+                    buttonLike.next().attr('style', "color: #90a4ae;");
+                    break;
+                case "like":
+                    buttonLike.attr('style', "color: #0b51c5;");
+                    buttonLike.next().attr('style', "color: #90a4ae;");
+                    break;
+                case "dislike":
+                    buttonLike.attr('style', "color: #90a4ae;");
+                    buttonLike.next().attr('style', "color: #0b51c5;");
+                    break;
+                default:
+                    buttonLike.attr('style', "color: #90a4ae;");
+                    buttonLike.next().attr('style', "color: #90a4ae;");
+                    break;
             }
         });
+})
+
+$(document).on('click', '#dislike',function () {
+    var buttonLike = $(this);
+    var id = buttonLike.attr('value');
+    $.get("/likePost", {idArticle: id, liked: false},function (data) {
+        switch (data) {
+            case "deleted":
+                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.prev().attr('style', "color: #90a4ae;");
+                break;
+            case "like":
+                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.prev().attr('style', "color: #0b51c5;");
+                break;
+            case "dislike":
+                buttonLike.attr('style', "color: #0b51c5;;")
+                buttonLike.prev().attr('style', "color: #90a4ae");
+                break;
+            default:
+                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.prev().attr('style', "color: #90a4ae;");
+                break;
+        }
+    });
 })
 

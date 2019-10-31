@@ -67,14 +67,18 @@
                                 <a href="/" class="list-group-item   waves-effect" id="regiter-user-bar"  >
                                     <i class="fas fa-user-plus mr-3"></i>Inicio</a>
 
-                                <a href="#" class="list-group-item   waves-effect" id="regiter-user-bar" data-toggle="modal" data-target="#RegisterUserModal">
-                                    <i class="fas fa-user-plus mr-3"></i>Registrar Usuario</a>
-                                <a href="#" class="list-group-item   waves-effect" data-toggle="modal" data-target="#modalListUser" id="list-user">
-                                    <i class="fas fa-list mr-3"></i>Listar Usuario</a>
-                                <a href="#" class="list-group-item   waves-effect">
-                                    <i class="fas fa-newspaper mr-3"></i>Listar Articulos</a>
+                                <#if user.administrator == true>
+                                    <a href="#" class="list-group-item   waves-effect" id="regiter-user-bar" data-toggle="modal" data-target="#RegisterUserModal">
+                                        <i class="fas fa-user-plus mr-3"></i>Registrar Usuario</a>
+                                    <a href="#" class="list-group-item   waves-effect" data-toggle="modal" data-target="#modalListUser" id="list-user">
+                                        <i class="fas fa-list mr-3"></i>Listar Usuario</a>
+                                </#if>
+                                <#if user.administrator == true || user.author == true>
+                                    <a href="#" class="list-group-item   waves-effect">
+                                        <i class="fas fa-newspaper mr-3"></i>Listar Articulos</a>
+                                </#if>
                                 <a href="/closeSession" class="list-group-item   waves-effect">
-                                    <i class="fas fa-newspaper mr-3"></i>Log-out</a>
+                                    <i class="fa fa-sign-out-alt mr-3"></i>Log-out</a>
                             </div>
                         </div>
                     </div>
@@ -153,8 +157,8 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a class="card-link" id="like" <#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> ><i class="fa fa-thumbs-up"></i> Me gusta</a>
-                                    <a class="card-link" id="dislike" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-down"></i> No me gusta</a>
+                                    <a class="card-link" id="like" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == true>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i></a>
+                                    <a class="card-link" id="dislike" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == false>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i></a>
 
                                 </div>
                             </div>

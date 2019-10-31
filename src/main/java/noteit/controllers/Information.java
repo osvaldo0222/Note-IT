@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import jdk.nashorn.internal.ir.ReturnNode;
 import net.bytebuddy.asm.Advice;
 import noteit.blog.Article;
-import noteit.blog.LikeArticle;
+import noteit.blog.PubLike;
 import noteit.blog.Tag;
 import noteit.blog.User;
 import noteit.services.ArticleService;
@@ -107,16 +107,33 @@ public class Information {
         });
 
         get("/likePost", (request, response) -> {
-            boolean status = false;
+            //none-> error
+            //like-> was a like
+            //dislike-> was a dislike
+            //deleted-> deleted like or dislike
+            String status = "none";
             User user = request.session().attribute("user");
             Article article = ArticleService.getInstance().find(Long.parseLong(request.queryParams("idArticle")));
+            boolean liked = Boolean.parseBoolean(request.queryParams("liked"));
             if (user != null && article != null) {
-                LikeArticle likeArticle = article.getUserLike(user.getUsername());
-                if (likeArticle == null) {
-                    LikeService.getInstance().create(new LikeArticle(user, article));
-                    status = true;
+                PubLike pubLike = article.getUserLike(user.getUsername());
+                if (pubLike == null) {
+                    article.addLike(new PubLike(user, liked));
+                    ArticleService.getInstance().update(article);
                 } else {
-                    LikeService.getInstance().delete(likeArticle.getId());
+                    boolean statusLiked = pubLike.isLiked();
+                    if (statusLiked == liked) {
+                        status = "deleted";
+                        pubLike.setAction("deleted");
+                    } else {
+                        pubLike.setLiked(liked);
+                        pubLike.setAction("updated");
+                    }
+                    ArticleService.getInstance().update(article);
+                }
+
+                if (status.equalsIgnoreCase("none")){
+                    status = (liked)?"like":"dislike";
                 }
             }
             return status;

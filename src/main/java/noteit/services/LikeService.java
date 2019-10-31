@@ -1,11 +1,11 @@
 package noteit.services;
 
-import noteit.blog.LikeArticle;
+import noteit.blog.PubLike;
 
-public class LikeService extends GenericCRUD<LikeArticle> {
+public class LikeService extends GenericCRUD<PubLike> {
     private static LikeService instance;
 
-    private LikeService(){ super(LikeArticle.class); }
+    private LikeService(){ super(PubLike.class); }
 
     public static LikeService getInstance() {
         if (instance == null) {

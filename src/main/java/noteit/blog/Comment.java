@@ -1,9 +1,12 @@
 package noteit.blog;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Comment implements Serializable {
@@ -16,6 +19,8 @@ public class Comment implements Serializable {
     private User author;
     @ManyToOne
     private Article article;
+    @OneToMany
+    private List<PubLike> likeList;
 
     public Comment() { }
 
@@ -45,9 +50,7 @@ public class Comment implements Serializable {
         return author;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
-    }
+    public void setAuthor(User author) { this.author = author; }
 
     public Article getArticle() {
         return article;
@@ -55,5 +58,13 @@ public class Comment implements Serializable {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public List<PubLike> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<PubLike> likeList) {
+        this.likeList = likeList;
     }
 }

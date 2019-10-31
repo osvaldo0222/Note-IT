@@ -5,7 +5,7 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
-import noteit.blog.LikeArticle;
+import noteit.blog.PubLike;
 import noteit.controllers.Authentication;
 import noteit.controllers.Filter;
 import noteit.controllers.Information;

@@ -25,9 +25,9 @@ public class Article implements Serializable {
     private List<Comment> commentList;
     @ManyToMany
     private List<Tag> tagList;
-    @OneToMany(mappedBy = "article")
+    @OneToMany
     @Fetch(FetchMode.JOIN)
-    private List<LikeArticle> likeList;
+    private List<PubLike> likeList;
 
     public Article() {}
 
@@ -94,15 +94,43 @@ public class Article implements Serializable {
         this.tagList = tagList;
     }
 
-    public List<LikeArticle> getLikeList() {
+    public List<PubLike> getLikeList() {
         return likeList;
     }
 
-    public void setLikeList(List<LikeArticle> likeList) {
+    public void setLikeList(List<PubLike> likeList) {
         this.likeList = likeList;
     }
 
-    public long getNumbersOfLikes(){ return (likeList == null)?0:likeList.size(); }
+    public long getNumbersOfLikes(){
+        long likes = 0;
+        if (likeList == null) {
+            likeList = new ArrayList<>();
+        }
+        for (PubLike pubLike : likeList) {
+            if (pubLike.isLiked()) {
+                likes++;
+            }
+        }
+        return likes;
+    }
+
+    public long getNumbersOfDislikes(){
+        long dislikes = 0;
+        if (likeList == null) {
+            likeList = new ArrayList<>();
+        }
+        for (PubLike pubLike : likeList) {
+            if (!pubLike.isLiked()) {
+                dislikes++;
+            }
+        }
+        return dislikes;
+    }
+
+    public long getNumbersOfComments(){
+        return (commentList == null)?0:commentList.size();
+    }
 
     public void addTag(Tag tag){
         if (tagList == null) {
@@ -120,14 +148,18 @@ public class Article implements Serializable {
         }
     }
 
-    public LikeArticle getUserLike(String username){
-        LikeArticle like = null;
-        for (LikeArticle likeArticle : likeList) {
+    public PubLike getUserLike(String username){
+        PubLike like = null;
+        for (PubLike likeArticle : likeList) {
             if (likeArticle.getUserLike().getUsername().equalsIgnoreCase(username)){
                 like = likeArticle;
                 break;
             }
         }
         return like;
+    }
+
+    public void addLike(PubLike pubLike){
+        likeList.add(pubLike);
     }
 }

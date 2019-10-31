@@ -31,7 +31,7 @@ public class Authentication {
                     if (rememberMe) {
                         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
                         textEncryptor.setPasswordCharArray(encryptPass.toCharArray());
-                        response.cookie("user", textEncryptor.encrypt(user.getUsername()), 604800, false, true);
+                        response.cookie("user", textEncryptor.encrypt(user.getUsername()), 604800, false);
                     }
                     response.redirect("/");
                     halt();

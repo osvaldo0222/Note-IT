@@ -32,8 +32,6 @@ public class Filter {
                     if (aux != null) {
                         Session session = request.session(true);
                         session.attribute("user", aux);
-                        response.removeCookie("user");
-                        response.cookie("user", textEncryptor.encrypt(aux.getUsername()), 604800, false, true);
                     } else {
                         response.removeCookie("user");
                     }

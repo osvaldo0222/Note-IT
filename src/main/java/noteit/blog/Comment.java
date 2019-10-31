@@ -5,6 +5,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -81,5 +82,31 @@ public class Comment implements Serializable {
 
     public void addLike(PubLike pubLike) {
         likeList.add(pubLike);
+    }
+
+    public long getNumbersOfLikes(){
+        long likes = 0;
+        if (likeList == null) {
+            likeList = new ArrayList<>();
+        }
+        for (PubLike pubLike : likeList) {
+            if (pubLike.isLiked()) {
+                likes++;
+            }
+        }
+        return likes;
+    }
+
+    public long getNumbersOfDislikes(){
+        long dislikes = 0;
+        if (likeList == null) {
+            likeList = new ArrayList<>();
+        }
+        for (PubLike pubLike : likeList) {
+            if (!pubLike.isLiked()) {
+                dislikes++;
+            }
+        }
+        return dislikes;
     }
 }

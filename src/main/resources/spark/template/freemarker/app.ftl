@@ -202,8 +202,8 @@
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a class="card-link" id="like" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == true>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i></a>
-                                      <a class="card-link" id="dislike" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == false>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i></a>
+                                      <a class="card-link" id="like" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == true>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i><span class="numberOfLikes"><#assign number = article.getNumbersOfLikes()><#if (number > 0)> ${number}</#if></span></a>
+                                      <a class="card-link" id="dislike" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == false>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i><span class="numberOfDislikes"><#assign number = article.getNumbersOfDislikes()><#if (number > 0)> ${number}</#if></span></a>
 
                                       <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
                                   </div>

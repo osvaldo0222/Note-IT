@@ -1,10 +1,9 @@
 package noteit.blog;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,11 +21,12 @@ public class Article implements Serializable {
     private User author;
     private Date date;
     @OneToMany(mappedBy = "article")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Comment> commentList;
     @ManyToMany
     private List<Tag> tagList;
     @OneToMany
-    @Fetch(FetchMode.JOIN)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<PubLike> likeList;
 
     public Article() {}

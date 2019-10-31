@@ -175,50 +175,45 @@
                     <section class="my-5">
 
                         <!-- Card header -->
-                        <div class="card-header border-0 font-weight-bold">4 comments</div>
+                        <div class="card-header border-0 font-weight-bold"><#if article??>${article.getNumbersOfComments()}</#if> comments</div>
 
+                        <#list article.commentList as comment>
                         <div class="media d-block d-md-flex mt-4">
                             <img class="card-img-64 d-flex mx-auto mb-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg"
                                  alt="Generic placeholder image">
                             <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                 <h5 class="font-weight-bold mt-0">
-                                    <a href="">Miley Steward</a>
+                                    <a href="">${comment.author.name}</a>
                                     <a href="" class="pull-right">
                                         <i class="fas fa-reply"></i>
                                     </a>
                                 </h5>
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat
-                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+                                <p>${comment.comment}</p>
 
                                 <!-- Quick Reply -->
                                 <div class="form-group mt-4">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="card-link" id="like" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-up"></i>Me gusta</a>
-
-                                            <a class="card-link" id="dislike" <#--<#if user??><#if article.getUserLike(user.username)??> style="color: #0b51c5;" <#else> style="color: #90a4ae;"  </#if></#if> -->><i class="fa fa-thumbs-down"></i>No me gusta</a>
-
+                                            <a class="card-link" id="commentLike" value="${comment.id}" style="<#if user??><#if comment.getUserLike(user.username)??><#if comment.getUserLike(user.username).liked == true>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i></a>
+                                            <a class="card-link" id="commentDislike" value="${comment.id}" style="<#if user??><#if comment.getUserLike(user.username)??><#if comment.getUserLike(user.username).liked == false>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i></a>
                                         </div>
                                     </div>
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <label for="quickReplyFormComment">Your comment</label>
-                                           <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
-
-                                           <div class="text-center my-4">
-                                               <button class="btn btn-primary btn-sm" type="submit">Comentar</button>
-                                           </div>
-                                       </div>
-                                   </div>
                                 </div>
-
-
                             </div>
                         </div>
+                        </#list>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form action="/registerComment/${article.id}" method="post" id="comment-form">
+                                    <label for="quickReplyFormComment">Your comment</label>
+                                    <textarea class="form-control" id="quickReplyFormComment" name="quickReplyFormComment" rows="5" form="comment-form"></textarea>
 
-
+                                    <div class="text-center my-4">
+                                        <button class="btn btn-primary btn-sm" type="submit">Comentar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <!--Pagination -->
 
                     </section>

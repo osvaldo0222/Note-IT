@@ -1,10 +1,9 @@
 package noteit.blog;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class Comment implements Serializable {
     @ManyToOne
     private Article article;
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<PubLike> likeList;
 
     public Comment() { }
@@ -66,5 +66,20 @@ public class Comment implements Serializable {
 
     public void setLikeList(List<PubLike> likeList) {
         this.likeList = likeList;
+    }
+
+    public PubLike getUserLike(String username){
+        PubLike like = null;
+        for (PubLike likeArticle : likeList) {
+            if (likeArticle.getUserLike().getUsername().equalsIgnoreCase(username)){
+                like = likeArticle;
+                break;
+            }
+        }
+        return like;
+    }
+
+    public void addLike(PubLike pubLike) {
+        likeList.add(pubLike);
     }
 }

@@ -4,11 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jdk.nashorn.internal.ir.ReturnNode;
 import net.bytebuddy.asm.Advice;
-import noteit.blog.Article;
-import noteit.blog.PubLike;
-import noteit.blog.Tag;
-import noteit.blog.User;
+import noteit.blog.*;
 import noteit.services.ArticleService;
+import noteit.services.CommentService;
 import noteit.services.LikeService;
 import noteit.services.UserService;
 import org.graalvm.compiler.lir.LIRInstruction;
@@ -32,7 +30,7 @@ public class Information {
         get("/seeArticle/:id",(request, response) -> {
             User user = request.session().attribute("user");
             Map<String, Object> values = new HashMap<>();
-            values.put("article",ArticleService.getInstance().find(Long.parseLong(request.params("id"))));
+            values.put("article", ArticleService.getInstance().find(Long.parseLong(request.params("id"))));
             values.put("user",user);
             return Template.renderFreemarker(values,"/article.ftl");
         });
@@ -104,6 +102,19 @@ public class Information {
             return "/";
         });
 
+        post("/registerComment/:id", (request, response) -> {
+            User user = request.session().attribute("user");
+            Long idArticle = Long.parseLong(request.params("id"));
+            String comment = request.queryParams("quickReplyFormComment");
+            if (user != null && idArticle != null && idArticle > 0 && !comment.equalsIgnoreCase("")) {
+                Article article = ArticleService.getInstance().find(idArticle);
+                Comment commentNew = new Comment(comment, user, article);
+                CommentService.getInstance().create(commentNew);
+                response.redirect("/seeArticle/" + idArticle);
+            }
+            return "";
+        });
+
         get("/likePost", (request, response) -> {
             //none-> error
             //like-> was a like
@@ -128,6 +139,39 @@ public class Information {
                         pubLike.setAction("updated");
                     }
                     ArticleService.getInstance().update(article);
+                }
+
+                if (status.equalsIgnoreCase("none")){
+                    status = (liked)?"like":"dislike";
+                }
+            }
+            return status;
+        });
+
+        get("/likeComment", (request, response) -> {
+            //none-> error
+            //like-> was a like
+            //dislike-> was a dislike
+            //deleted-> deleted like or dislike
+            String status = "none";
+            User user = request.session().attribute("user");
+            Comment comment = CommentService.getInstance().find(Long.parseLong(request.queryParams("idComment")));
+            boolean liked = Boolean.parseBoolean(request.queryParams("liked"));
+            if (user != null && comment != null) {
+                PubLike pubLike = comment.getUserLike(user.getUsername());
+                if (pubLike == null) {
+                    comment.addLike(new PubLike(user, liked));
+                    CommentService.getInstance().update(comment);
+                } else {
+                    boolean statusLiked = pubLike.isLiked();
+                    if (statusLiked == liked) {
+                        status = "deleted";
+                        pubLike.setAction("deleted");
+                    } else {
+                        pubLike.setLiked(liked);
+                        pubLike.setAction("updated");
+                    }
+                    CommentService.getInstance().update(comment);
                 }
 
                 if (status.equalsIgnoreCase("none")){

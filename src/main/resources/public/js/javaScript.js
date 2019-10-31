@@ -167,17 +167,34 @@ function listUser() {
 $(document).on('click', '#like',function () {
         var buttonLike = $(this);
         var id = buttonLike.attr('value');
+        var x = $(this).find("span");
         $.get("/likePost", {idArticle: id, liked: true},function (data) {
             switch (data) {
                 case "deleted":
+                    if (parseInt(x[0].innerHTML, 10) == 1){
+                        x[0].innerHTML = "";
+                    } else {
+                        x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                    }
                     buttonLike.attr('style', "color: #90a4ae;");
                     buttonLike.next().attr('style', "color: #90a4ae;");
                     break;
                 case "like":
+                    if (x[0].innerHTML.trim() == ""){
+                        x[0].innerHTML = " 1";
+                    } else {
+                        x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                    }
                     buttonLike.attr('style', "color: #0b51c5;");
                     buttonLike.next().attr('style', "color: #90a4ae;");
                     break;
                 case "dislike":
+                    if (parseInt(x[0].innerHTML, 10) == 1){
+                        x[0].innerHTML = "";
+                    } else {
+                        x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                        (buttonLike.next().find("span"))[0].innerHTML = " " + ((parseInt(buttonLike.next().find("span"))[0].innerHTML.trim(), 10) + 1);
+                    }
                     buttonLike.attr('style', "color: #90a4ae;");
                     buttonLike.next().attr('style', "color: #0b51c5;");
                     break;
@@ -192,7 +209,68 @@ $(document).on('click', '#like',function () {
 $(document).on('click', '#dislike',function () {
     var buttonLike = $(this);
     var id = buttonLike.attr('value');
+    var x = $(this).find("span");
     $.get("/likePost", {idArticle: id, liked: false},function (data) {
+        switch (data) {
+            case "deleted":
+                if (parseInt(x[0].innerHTML, 10) == 1){
+                    x[0].innerHTML = "";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                }
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.prev().attr('style', "color: #90a4ae;");
+                break;
+            case "like":
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.prev().attr('style', "color: #0b51c5;");
+                break;
+            case "dislike":
+                if (x[0].innerHTML.trim() == ""){
+                    x[0].innerHTML = " 1";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                }
+                buttonLike.attr('style', "color: #0b51c5;;");
+                buttonLike.prev().attr('style', "color: #90a4ae");
+                break;
+            default:
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.prev().attr('style', "color: #90a4ae;");
+                break;
+        }
+    });
+});
+
+$(document).on('click', '#commentLike',function () {
+    var buttonLike = $(this);
+    var id = buttonLike.attr('value');
+    $.get("/likeComment", {idComment: id, liked: true},function (data) {
+        switch (data) {
+            case "deleted":
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.next().attr('style', "color: #90a4ae;");
+                break;
+            case "like":
+                buttonLike.attr('style', "color: #0b51c5;");
+                buttonLike.next().attr('style', "color: #90a4ae;");
+                break;
+            case "dislike":
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.next().attr('style', "color: #0b51c5;");
+                break;
+            default:
+                buttonLike.attr('style', "color: #90a4ae;");
+                buttonLike.next().attr('style', "color: #90a4ae;");
+                break;
+        }
+    });
+});
+
+$(document).on('click', '#commentDislike',function () {
+    var buttonLike = $(this);
+    var id = buttonLike.attr('value');
+    $.get("/likeComment", {idComment: id, liked: false},function (data) {
         switch (data) {
             case "deleted":
                 buttonLike.attr('style', "color: #90a4ae;");

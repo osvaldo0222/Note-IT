@@ -21,7 +21,7 @@ public class Filter {
             }
         });
 
-        before("/", (request, response) -> {
+        before((request, response) -> {
             User user = request.session().attribute("user");
             if (user == null)  {
                 if (request.cookie("user") != null){
@@ -32,6 +32,7 @@ public class Filter {
                     if (aux != null) {
                         Session session = request.session(true);
                         session.attribute("user", aux);
+                        response.removeCookie("user");
                         response.cookie("user", textEncryptor.encrypt(aux.getUsername()), 604800, false, true);
                     } else {
                         response.removeCookie("user");
@@ -47,6 +48,19 @@ public class Filter {
                 halt(300);
             } else {
                 if (request.queryParams("idArticle") == null) {
+                    response.redirect("/");
+                    halt();
+                }
+            }
+        });
+
+        before("/registerComment/*", (request, response) -> {
+            User user = request.session().attribute("user");
+            if (user == null) {
+                response.redirect("/login");
+                halt(300);
+            } else {
+                if (request.queryParams("quickReplyFormComment") == null) {
                     response.redirect("/");
                     halt();
                 }

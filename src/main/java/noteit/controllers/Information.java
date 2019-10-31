@@ -90,20 +90,18 @@ public class Information {
 
         post("/registerArticle",(request, response) -> {
             User user = request.session().attribute("user");
-
             String title = request.queryParams("title");
             String articleBody = request.queryParams("article");
             String jsonArray = request.queryParams("json");
             java.util.Date date = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             JSONArray json = new JSONArray(jsonArray);
-            Article article1 = new Article(title,articleBody,user,sqlDate);
+            Article article1 = new Article(title, articleBody, user, sqlDate);
             for (int i =0;i<json.length();i++){
                 article1.addTag(new Tag(json.get(i).toString()));
             }
             ArticleService.getInstance().create(article1);
-            response.redirect("/");
-            return "";
+            return "/";
         });
 
         get("/likePost", (request, response) -> {

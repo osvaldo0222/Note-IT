@@ -1,16 +1,9 @@
 $(document).on('click','#editUser',function () {
-
-    console.log("PEPE")
     var curRow = $(this).closest('tr');
     var username = curRow.find('td:eq(0)').text();
-
     var name = curRow.find('td:eq(1)').text();
-
     var author = curRow.find('td:eq(2)').text();
-
     var admin = curRow.find('td:eq(3)').text();
-
-
 
     $('#modalListUser').modal('hide')
     $('#titleModalRegister-update').empty()
@@ -35,10 +28,9 @@ $(document).on('click','#editUser',function () {
     }else{
         $('#materialUncheckedAdmin').attr('value',false);
         $('#materialUncheckedAdmin').prop('checked',false);
-
     }
+});
 
-})
 $(document).on('click','#deleteModalConfirmDeleteArticle',function () {
     $('#modalConfirmDelete p#confirmTitle').empty();
     $('#modalConfirmDelete p#confirmTitle').text("Eliminar Articulo");
@@ -46,26 +38,19 @@ $(document).on('click','#deleteModalConfirmDeleteArticle',function () {
 
 
 
-})
+});
+
 $(document).on('click','#deleteModalConfirm',function () {
     $('#modalConfirmDelete p#confirmTitle').empty();
     $('#modalConfirmDelete p#confirmTitle').text("Eliminar Usuario");
     $('#messageDelete').text("Seguro de eliminar el usuario ")
+});
 
-
-
-})
-listUser()
-submitArticle()
+listUser();
 $(document).ready(function(){
     var data;
-
-    tags()
-
-
-    var array = []
-
-
+    tags();
+    var array = [];
 
       $( "#regiter-user-bar" ).click(function() {
           checkBox()
@@ -84,13 +69,9 @@ $(document).ready(function(){
 
       $('#deleteModalConfirm').click(function(){
         //$('#modalListUser').modal('hide')
-
       })
+});
 
-
-
-
-})
 function checkBox() {
     $('#materialUncheckedAuthor').click(function () {
         if ($(this).is(":checked")){
@@ -106,7 +87,6 @@ function checkBox() {
             $('#materialUncheckedAdmin').attr('value',false);
         }
     })
-
 }
 
 function tags(){
@@ -148,25 +128,10 @@ function tags(){
              data = JSON.stringify(k);
 
         }
-
-
     })
     return k;
 }
 
-
-function submitArticle() {
-    $('#postArticle').click(function () {
-        var title = $('input.name-article').val()
-        var article = $('textarea.exampleFormControlTextarea5').val()
-        $.post("/registerArticle",{title:title,article:article,json:data},
-            function () {
-            })
-        alert("q")
-        history.go(0);
-    })
-
-}
 function listUser() {
         $('#list-user').click(function () {
             $.get("/listUser",function (data) {
@@ -222,7 +187,7 @@ $(document).on('click', '#like',function () {
                     break;
             }
         });
-})
+});
 
 $(document).on('click', '#dislike',function () {
     var buttonLike = $(this);
@@ -230,22 +195,30 @@ $(document).on('click', '#dislike',function () {
     $.get("/likePost", {idArticle: id, liked: false},function (data) {
         switch (data) {
             case "deleted":
-                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.prev().attr('style', "color: #90a4ae;");
                 break;
             case "like":
-                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.prev().attr('style', "color: #0b51c5;");
                 break;
             case "dislike":
-                buttonLike.attr('style', "color: #0b51c5;;")
+                buttonLike.attr('style', "color: #0b51c5;;");
                 buttonLike.prev().attr('style', "color: #90a4ae");
                 break;
             default:
-                buttonLike.attr('style', "color: #90a4ae;")
+                buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.prev().attr('style', "color: #90a4ae;");
                 break;
         }
     });
-})
+});
+
+$(document).on('click', '#postArticle', function () {
+    var title = $('input.name-article').val();
+    var article = $('textarea.exampleFormControlTextarea5').val();
+    $.post("/registerArticle",{title:title, article:article, json:data}, function (data) {
+        window.location = data;
+    });
+});
 

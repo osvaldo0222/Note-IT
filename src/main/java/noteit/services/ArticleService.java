@@ -1,6 +1,7 @@
 package noteit.services;
 
 import noteit.blog.Article;
+import noteit.blog.Comment;
 import noteit.blog.PubLike;
 import noteit.blog.Tag;
 
@@ -71,7 +72,7 @@ public class ArticleService extends GenericCRUD<Article> {
     @Override
     public List<Article> findAll() {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select distinct a from Article a inner join fetch a.tagList order by a.date desc, a.id desc");
+        Query query = em.createQuery("select distinct a from Article a inner join fetch a.tagList order by a.date desc");
         List<Article> articles = query.getResultList();
         em.close();
         return articles;
@@ -84,5 +85,60 @@ public class ArticleService extends GenericCRUD<Article> {
         List<Article> list = query.getResultList();
         em.close();
         return (list.size() == 0)?null:list.get(0);
+    }
+
+    public List<Article> findByUser(String username){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select distinct a from Article a where a.author.username = :user");
+        query.setParameter("user", username);
+        List<Article> articles = query.getResultList();
+        em.close();
+        return articles;
+    }
+
+    public List<Article> findFive(int startPosition) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select distinct a from Article a order by a.date desc");
+        query.setFirstResult(startPosition);
+        query.setMaxResults(5);
+        List<Article> articles = query.getResultList();
+        for (Article aux : articles) {
+            aux.getTagList().size();
+            em.detach(aux);
+        }
+        em.close();
+        return articles;
+    }
+
+    public List<Article> findFive(int startPosition, String filterTag) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select distinct a from Article a join a.tagList ll where ll.tag = :tag order by a.date desc");
+        query.setParameter("tag", filterTag.toLowerCase());
+        query.setFirstResult(startPosition);
+        query.setMaxResults(5);
+        List<Article> articles = query.getResultList();
+        for (Article aux : articles) {
+            aux.getTagList().size();
+            em.detach(aux);
+        }
+        em.close();
+        return articles;
+    }
+
+    public Integer countArticles(){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select count(a) from Article a");
+        Integer result = Integer.parseInt(query.getSingleResult().toString());
+        em.close();
+        return result;
+    }
+
+    public Integer countArticles(String filterTag){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select count(a) from Article a join a.tagList tl where tl.tag = :tag");
+        query.setParameter("tag", filterTag.toLowerCase());
+        Integer result = Integer.parseInt(query.getSingleResult().toString());
+        em.close();
+        return result;
     }
 }

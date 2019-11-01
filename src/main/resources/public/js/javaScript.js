@@ -195,20 +195,37 @@ function listUser() {
 $(document).on('click', '#like',function () {
         var buttonLike = $(this);
         var id = buttonLike.attr('value');
-        //var x = $(this).find("span");
+        var x = $(this).find("span");
+        var next = buttonLike.next().find("span");
         $.get("/likePost", {idArticle: id, liked: true},function (data) {
             switch (data) {
                 case "deleted":
+                    if (parseInt(x[0].innerHTML.trim(), 10) == 1){
+                        x[0].innerHTML = "";
+                    } else {
+                        x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                    }
+                    x.removeClass("active");
                     buttonLike.attr('style', "color: #90a4ae;");
                     buttonLike.next().attr('style', "color: #90a4ae;");
                     break;
                 case "like":
+                    if (x[0].innerHTML.trim() == ""){
+                        x[0].innerHTML = " 1";
+                    } else {
+                        x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                    }
+                    if(next.hasClass("active")){
+                        next.removeClass("active");
+                        if (parseInt(next[0].innerHTML.trim(), 10) == 1){
+                            next[0].innerHTML = "";
+                        } else {
+                            next[0].innerHTML = " " + (parseInt(next[0].innerHTML.trim(), 10) - 1);
+                        }
+                    }
+                    x.addClass("active");
                     buttonLike.attr('style', "color: #0b51c5;");
                     buttonLike.next().attr('style', "color: #90a4ae;");
-                    break;
-                case "dislike":
-                    buttonLike.attr('style', "color: #90a4ae;");
-                    buttonLike.next().attr('style', "color: #0b51c5;");
                     break;
                 default:
                     buttonLike.attr('style', "color: #90a4ae;");
@@ -221,19 +238,36 @@ $(document).on('click', '#like',function () {
 $(document).on('click', '#dislike',function () {
     var buttonLike = $(this);
     var id = buttonLike.attr('value');
-    //var x = $(this).find("span");
+    var x = $(this).find("span");
+    var prev = buttonLike.prev().find("span");
     $.get("/likePost", {idArticle: id, liked: false},function (data) {
         switch (data) {
             case "deleted":
+                if (parseInt(x[0].innerHTML.trim(), 10) == 1){
+                    x[0].innerHTML = "";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                }
+                x.removeClass("active");
                 buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.prev().attr('style', "color: #90a4ae;");
                 break;
-            case "like":
-                buttonLike.attr('style', "color: #90a4ae;");
-                buttonLike.prev().attr('style', "color: #0b51c5;");
-                break;
             case "dislike":
-                buttonLike.attr('style', "color: #0b51c5;;");
+                if (x[0].innerHTML.trim() == ""){
+                    x[0].innerHTML = " 1";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                }
+                if(prev.hasClass("active")){
+                    prev.removeClass("active");
+                    if (parseInt(prev[0].innerHTML.trim(), 10) == 1){
+                        prev[0].innerHTML = "";
+                    } else {
+                        prev[0].innerHTML = " " + (parseInt(prev[0].innerHTML.trim(), 10) - 1);
+                    }
+                }
+                x.addClass("active");
+                buttonLike.attr('style', "color: #0b51c5;");
                 buttonLike.prev().attr('style', "color: #90a4ae");
                 break;
             default:
@@ -247,19 +281,37 @@ $(document).on('click', '#dislike',function () {
 $(document).on('click', '#commentLike',function () {
     var buttonLike = $(this);
     var id = buttonLike.attr('value');
+    var x = $(this).find("span");
+    var next = buttonLike.next().find("span");
     $.get("/likeComment", {idComment: id, liked: true},function (data) {
         switch (data) {
             case "deleted":
+                if (parseInt(x[0].innerHTML.trim(), 10) == 1){
+                    x[0].innerHTML = "";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                }
+                x.removeClass("active");
                 buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.next().attr('style', "color: #90a4ae;");
                 break;
             case "like":
+                if (x[0].innerHTML.trim() == ""){
+                    x[0].innerHTML = " 1";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                }
+                if(next.hasClass("active")){
+                    next.removeClass("active");
+                    if (parseInt(next[0].innerHTML.trim(), 10) == 1){
+                        next[0].innerHTML = "";
+                    } else {
+                        next[0].innerHTML = " " + (parseInt(next[0].innerHTML.trim(), 10) - 1);
+                    }
+                }
+                x.addClass("active");
                 buttonLike.attr('style', "color: #0b51c5;");
                 buttonLike.next().attr('style', "color: #90a4ae;");
-                break;
-            case "dislike":
-                buttonLike.attr('style', "color: #90a4ae;");
-                buttonLike.next().attr('style', "color: #0b51c5;");
                 break;
             default:
                 buttonLike.attr('style', "color: #90a4ae;");
@@ -272,18 +324,36 @@ $(document).on('click', '#commentLike',function () {
 $(document).on('click', '#commentDislike',function () {
     var buttonLike = $(this);
     var id = buttonLike.attr('value');
+    var x = $(this).find("span");
+    var prev = buttonLike.prev().find("span");
     $.get("/likeComment", {idComment: id, liked: false},function (data) {
         switch (data) {
             case "deleted":
+                if (parseInt(x[0].innerHTML.trim(), 10) == 1){
+                    x[0].innerHTML = "";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) - 1);
+                }
+                x.removeClass("active");
                 buttonLike.attr('style', "color: #90a4ae;");
                 buttonLike.prev().attr('style', "color: #90a4ae;");
                 break;
-            case "like":
-                buttonLike.attr('style', "color: #90a4ae;");
-                buttonLike.prev().attr('style', "color: #0b51c5;");
-                break;
             case "dislike":
-                buttonLike.attr('style', "color: #0b51c5;;");
+                if (x[0].innerHTML.trim() == ""){
+                    x[0].innerHTML = " 1";
+                } else {
+                    x[0].innerHTML = " " + (parseInt(x[0].innerHTML.trim(), 10) + 1);
+                }
+                if(prev.hasClass("active")){
+                    prev.removeClass("active");
+                    if (parseInt(prev[0].innerHTML.trim(), 10) == 1){
+                        prev[0].innerHTML = "";
+                    } else {
+                        prev[0].innerHTML = " " + (parseInt(prev[0].innerHTML.trim(), 10) - 1);
+                    }
+                }
+                x.addClass("active");
+                buttonLike.attr('style', "color: #0b51c5;");
                 buttonLike.prev().attr('style', "color: #90a4ae");
                 break;
             default:
@@ -301,6 +371,7 @@ $(document).on('click', '#postArticle', function () {
         window.location = data;
     });
 });
+
 $(document).on('click', '#postArticle-update', function () {
     var title = $('input.name-article').val();
     alert(title)

@@ -3,6 +3,7 @@ package noteit.blog;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Comment implements Serializable {
     private User author;
     @ManyToOne
     private Article article;
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PubLike> likeList;
 

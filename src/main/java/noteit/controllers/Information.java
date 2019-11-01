@@ -95,9 +95,78 @@ public class Information {
             User user = request.session().attribute("user");
             if(user != null){
                 values.put("user",user);
-                values.put("users",UserService.getInstance().findAll());
+                values.put("users", UserService.getInstance().findAll());
             }
-            values.put("articles",ArticleService.getInstance().findAll());
+            values.put("articles",ArticleService.getInstance().findFive(0));
+
+            int counterArticle = ArticleService.getInstance().countArticles();
+            if (counterArticle > 0) {
+                int pos = 1;
+                List<String> pages = new ArrayList<>();
+                pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Previous</a></li>");
+                for (int i = 0;i<counterArticle;i+=5){
+                    if (i == 0) {
+                        pages.add("<li class=\"page-item active\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
+                    } else {
+                        pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
+                    }
+                }
+                if (counterArticle <= 5) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Next</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/5\">Next</a></li>");
+                }
+                values.put("pages", pages);
+            }
+            return Template.renderFreemarker(values,"/app.ftl");
+        });
+
+        get("/loadArticles/:startPosition", (request, response) -> {
+            int startPosition = Integer.parseInt(request.params("startPosition"));
+            String filterTag = "";
+            if(request.queryParams("search") != null) {
+                filterTag = request.queryParams("search");
+            }
+            Map<String, Object> values = new HashMap<>();
+            User user = request.session().attribute("user");
+            List<Article> articles = null;
+            if (startPosition >= 0) {
+                if (!filterTag.equalsIgnoreCase("")) {
+                    articles =  ArticleService.getInstance().findFive(startPosition, filterTag);
+                    values.put("filterTag", filterTag.toLowerCase());
+                } else {
+                    articles =  ArticleService.getInstance().findFive(startPosition);
+                }
+            }
+            if(user != null){
+                values.put("user",user);
+                values.put("users", UserService.getInstance().findAll());
+            }
+            values.put("articles", articles);
+            int counterArticle = (!filterTag.equalsIgnoreCase(""))?ArticleService.getInstance().countArticles(filterTag):ArticleService.getInstance().countArticles();
+            if (counterArticle > 0) {
+                int pos = 1;
+                List<String> pages = new ArrayList<>();
+                if (startPosition == 0) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Previous</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+((!filterTag.equalsIgnoreCase(""))?((startPosition-5)+"?search="+filterTag):(startPosition-5))+"\">Previous</a></li>");
+                }
+                for (int i = 0;i<counterArticle;i+=5){
+                    String aux = ((!filterTag.equalsIgnoreCase(""))?((i)+"?search="+filterTag):(i+""));
+                    if (startPosition == i) {
+                        pages.add("<li class=\"page-item active\"><a class=\"page-link\" href=\"/loadArticles/"+aux+"\">"+(pos++)+"</a></li>");
+                    } else {
+                        pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+aux+"\">"+(pos++)+"</a></li>");
+                    }
+                }
+                if (counterArticle <= (startPosition + 5)) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Next</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+((!filterTag.equalsIgnoreCase(""))?((startPosition+5)+"?search="+filterTag):(startPosition+5))+"\">Next</a></li>");
+                }
+                values.put("pages", pages);
+            }
             return Template.renderFreemarker(values,"/app.ftl");
         });
 

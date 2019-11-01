@@ -3,6 +3,7 @@ package noteit.blog;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,12 +21,12 @@ public class Article implements Serializable {
     @OneToOne
     private User author;
     private Date date;
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Comment> commentList;
     @ManyToMany
     private List<Tag> tagList;
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PubLike> likeList;
 

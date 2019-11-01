@@ -20,14 +20,14 @@
   <!-- Start your project here-->
   <#if !(user??)>
       <nav class="navbar navbar-dark  info-color fixed-top ">
-          <a class="navbar-brand" href="#"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
-          <form class="form-inline my-1">
+          <a class="navbar-brand" href="/"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
+          <form action="/loadArticles/0" class="form-inline my-1" method="get">
               <div class="md-form form-sm my-0 ml-auto">
-                  <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" aria-label="Search">
+                  <input class="form-control form-control-sm mr-sm-2 mb-0" name="search" id="search" type="text" placeholder="Search Tag" aria-label="Search Tag" value="<#if filterTag??>${filterTag}</#if>">
               </div>
               <button class="btn btn-outline-white btn-sm my-0" type="submit">Buscar </button>
           </form>
-          <a href="login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
+          <a href="/login"><button class="btn btn-outline-white btn-sm my-0" type="submit">Login </button></a>
       </nav>
       <style>
           #firstRow {
@@ -153,7 +153,7 @@
               <!-- Post /////-->
 
               <div class="row">
-                  <div class="col-12">
+                  <div class="col-12 articles">
                       <!--- \\\\\\\Post model-->
                       <#if articles??>
 
@@ -202,17 +202,25 @@
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a class="card-link" id="like" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == true>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i><span class="numberOfLikes"><#assign number = article.getNumbersOfLikes()><#if (number > 0)> ${number}</#if></span></a>
-                                      <a class="card-link" id="dislike" value="${article.id}" style="<#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == false>color: #0b51c5;<#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i><span class="numberOfDislikes"><#assign number = article.getNumbersOfDislikes()><#if (number > 0)> ${number}</#if></span></a>
+                                      <a class="card-link" id="like" value="${article.id}" style="<#assign aux = false><#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == true>color: #0b51c5;<#assign aux = true><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"  ><i class="fa fa-thumbs-up"></i><span class="<#if aux == true>active</#if>"><#assign number = article.getNumbersOfLikes()><#if (number > 0)> ${number}</#if></span></a>
+                                      <a class="card-link" id="dislike" value="${article.id}" style="<#assign aux = false><#if user??><#if article.getUserLike(user.username)??><#if article.getUserLike(user.username).liked == false>color: #0b51c5;<#assign aux = true><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if><#else>color: #90a4ae;</#if>"> <i class="fa fa-thumbs-down"></i><span class="<#if aux == true>active</#if>"><#assign number = article.getNumbersOfDislikes()><#if (number > 0)> ${number}</#if></span></a>
 
-                                      <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i> Comentar</a>
+                                      <a class="card-link" id="like" style="color: #90a4ae;"><i class="fa fa-comment"></i><span><#assign number = article.getNumbersOfComments()><#if (number > 0)> ${number}</#if></span></a>
                                   </div>
                               </div>
                               <br>
                           </#list>
 
                       </#if>
-
+                      <#if pages??>
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                              <#list pages as page>
+                                  ${page}
+                              </#list>
+                          </ul>
+                      </nav>
+                      </#if>
                   </div>
               </div>
               <!-- Post model /////-->
@@ -383,15 +391,15 @@
   <!-- Start your project here-->
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <script type="text/javascript" src="js/javaScript.js"></script>
-  <script type="text/javascript" src="js/listUsers.js"></script>
+  <script type="text/javascript" src="/js/mdb.min.js"></script>
+  <script type="text/javascript" src="/js/javaScript.js"></script>
+  <script type="text/javascript" src="/js/listUsers.js"></script>
   <script>
       var a = document.getElementsByClassName("card-text");
       var i;

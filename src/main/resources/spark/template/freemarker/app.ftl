@@ -239,8 +239,6 @@
           <div class="col-md-3 ">
 
               <div class=" position-fixed" id="right-column">
-
-
                               <form action="/loadArticles/0" class="form-inline my-1" method="get">
                                   <div class="md-form form-sm my-0 ml-auto">
                                       <input class="form-control form-control-sm mr-sm-2 mb-0 ml-1" name="search" id="search" type="text" placeholder="Buscar Tag" aria-label="Buscar Tag" value="<#if filterTag??>${filterTag}</#if>">

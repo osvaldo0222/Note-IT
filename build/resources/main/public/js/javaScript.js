@@ -35,7 +35,11 @@ $(document).on('click','#editUser',function () {
 $(document).on('click','#deleteModalConfirmDeleteArticle',function () {
     $('#modalConfirmDelete p#confirmTitle').empty();
     $('#modalConfirmDelete p#confirmTitle').text("Eliminar Articulo");
-    $('#messageDelete').text("Seguro de eliminar el articulo ");
+    $('#modalConfirmDelete p.messageDelete').text("Seguro de eliminar el articulo?");
+
+
+
+   // / $('p#messageDelete').text("Seguro de eliminar el articulo " +name);
 
 
 

@@ -107,7 +107,7 @@
                                                 <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                             </div>
                                             <div class="ml-2">
-                                                <h5 class="card-title">${article.title}</h5>
+                                                <h5 class="card-title" id="title-article-name-delete" value="${article.title}">${article.title}</h5>
                                                 <div class="h7 m-0">Por: ${article.author.name}  <div class="text-muted h7 mb-2 float-right"> <i class="fa fa-clock-o"></i>  ${article.date}</div></div>
                                                 <div class="h7 text-muted"><#--${article.author.username}--></div>
                                             </div>
@@ -386,7 +386,7 @@
                 <i class="fas fa-times fa-4x animated rotateIn"></i>
                 <div class="row">
                     <div class="col">
-                        <span class="messageDelete"> ${article.title}</span>
+                        <span class=""><p class="messageDelete"></p> </span>
                     </div>
                 </div>
 

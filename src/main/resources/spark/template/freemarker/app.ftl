@@ -54,9 +54,7 @@
                 </div>
                   <div class="row">
                       <div class="col">
-                         <#if user??>
-                             ${user.username}
-                         </#if>
+
 
                       </div>
                   </div>

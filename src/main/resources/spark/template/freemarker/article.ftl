@@ -54,9 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <#if user??>
-                                ${user.username}
-                            </#if>
+
 
                         </div>
                     </div>
@@ -470,19 +468,21 @@
 
                                     <textarea class="form-control exampleFormControlTextarea5 textArticle" id="exampleFormControlTextarea5" rows="3" name="textArticle"></textarea>
                                 </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary postArticle-update" id="postArticle-update" type="submit">Publicar</a>
+                                </div>
                                 <!--Form for article to submit-->
                             </div>
                         </div>
-                        <div class="btn-toolbar justify-content-between float-right">
-                            <div class="btn-group">
-                                <a class="btn btn-primary" id="postArticle-update">Publicar</a>
-                            </div>
 
-                        </div>
                     </div>
                     <!--Input field for post-->
                 </div>
             </div>
+
+        </div>
+        <div class="btn-toolbar justify-content-between float-right">
+
 
         </div>
     </div>

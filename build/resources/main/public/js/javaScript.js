@@ -73,12 +73,24 @@ $(document).on('click','#update-article',function () {
     })
 
 })
+$(document).on('click', '.postArticle-update', function () {
+    var title = $('input.name-article').val();
 
+    //var k = tags();
+    //var data = JSON.stringify(k);
+    var article = $('textarea.exampleFormControlTextarea5').val();
+    var id = $('input#hidden').val();
+    alert(data)
+    $.post("/updateArticle",{id:id,title:title, article:article, json:data}, function (data) {
+        window.location = data;
+    });
+});
 
 
 listUser();
+var data;
 $(document).ready(function(){
-    var data;
+    data = []
     tags();
     var array = [];
 
@@ -367,17 +379,8 @@ $(document).on('click', '#commentDislike',function () {
 $(document).on('click', '#postArticle', function () {
     var title = $('input.name-article').val();
     var article = $('textarea.exampleFormControlTextarea5').val();
-    $.post("/registerArticle",{title:title, article:article, json:data}, function (data) {
-        window.location = data;
+    $.post("/registerArticle",{title:title, article:article, json:data}, function (location) {
+        window.location = location;
     });
 });
 
-$(document).on('click', '#postArticle-update', function () {
-    var title = $('input.name-article').val();
-    alert(title)
-    var article = $('textarea.exampleFormControlTextarea5').val();
-    var id = $('input#hidden').val();
-    $.post("/updateArticle",{id:id,title:title, article:article, json:data}, function (data) {
-        window.location = data;
-    });
-});

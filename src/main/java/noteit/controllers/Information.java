@@ -24,12 +24,13 @@ import static spark.Spark.*;
 public class Information {
     public void informationControllers(){
 
-        post("/updatearticle",(request, response) -> {
+        post("/updateArticle",(request, response) -> {
             User user = request.session().attribute("user");
             String title = request.queryParams("title");
-            System.out.println(title);
+
             String articleBody = request.queryParams("article");
             String jsonArray = request.queryParams("json");
+            System.out.println(jsonArray);
             String id = request.queryParams("id");
             Article article = ArticleService.getInstance().find(Long.parseLong(id));
             article.setTitle(title);
@@ -50,16 +51,13 @@ public class Information {
              articles.add(0,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTitle());
              articles.add(1,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getBody());
             articles.add(2,(request.queryParams("id")));
-
              int j = 3;
              for (int i = 0;i<ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTagList().size();i++){
                  articles.add(j,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTagList().get(i).getTag());
                  j++;
              }
-
              ObjectMapper mapper = new ObjectMapper();
              String x = mapper.writeValueAsString(articles);
-            System.out.println(x);
             return x;
         });
 
@@ -215,11 +213,15 @@ public class Information {
             String jsonArray = request.queryParams("json");
             java.util.Date date = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            JSONArray json = new JSONArray(jsonArray);
             Article article1 = new Article(title, articleBody, user, sqlDate);
-            for (int i =0;i<json.length();i++){
-                article1.addTag(new Tag(json.get(i).toString()));
+            if (jsonArray.isEmpty()){
+            }else {
+                JSONArray json = new JSONArray(jsonArray);
+                for (int i =0;i<json.length();i++){
+                    article1.addTag(new Tag(json.get(i).toString()));
+                }
             }
+
             ArticleService.getInstance().create(article1);
             return "/";
         });

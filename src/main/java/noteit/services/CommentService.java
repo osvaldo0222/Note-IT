@@ -3,6 +3,8 @@ package noteit.services;
 import noteit.blog.Comment;
 import noteit.blog.PubLike;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +45,15 @@ public class CommentService extends GenericCRUD<Comment> {
             likeList.remove(aux);
         }
         return toDelete;
+    }
+
+    public List<Comment> findByUser(String username){
+        List<Comment> comments = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select c from Comment c where c.author.username = :user");
+        query.setParameter("user", username);
+        comments = query.getResultList();
+        em.close();
+        return comments;
     }
 }

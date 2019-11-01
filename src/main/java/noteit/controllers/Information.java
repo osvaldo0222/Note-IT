@@ -97,8 +97,28 @@ public class Information {
                 values.put("user",user);
                 values.put("users",UserService.getInstance().findAll());
             }
-            values.put("articles",ArticleService.getInstance().findAll());
+            values.put("articles",ArticleService.getInstance().findFive(0));
             return Template.renderFreemarker(values,"/app.ftl");
+        });
+
+        post("/loadArticle", (request, response) -> {
+            int startPosition = Integer.parseInt(request.queryParams("startPosition"));
+            String json = null;
+            if (startPosition >= 0) {
+                List<Article> articles =  ArticleService.getInstance().findFive(startPosition);
+                for (Article article : articles){
+                    article.getAuthor().setPassword("");
+                    for (Comment c : article.getCommentList()) {
+                        c.getAuthor().setPassword("");
+                    }
+                    for (PubLike pubLike : article.getLikeList()) {
+                        pubLike.getUserLike().setPassword("");
+                    }
+                }
+                json = new Gson().toJson(articles);
+            }
+            response.type("application/json");
+            return json;
         });
 
         post("/registerUser",(request, response) -> {

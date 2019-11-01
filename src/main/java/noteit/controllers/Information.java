@@ -95,30 +95,69 @@ public class Information {
             User user = request.session().attribute("user");
             if(user != null){
                 values.put("user",user);
-                values.put("users",UserService.getInstance().findAll());
+                values.put("users", UserService.getInstance().findAll());
             }
             values.put("articles",ArticleService.getInstance().findFive(0));
+
+            int counterArticle = ArticleService.getInstance().countArticles();
+            if (counterArticle > 0) {
+                int pos = 1;
+                List<String> pages = new ArrayList<>();
+                pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Previous</a></li>");
+                for (int i = 0;i<counterArticle;i+=5){
+                    if (i == 0) {
+                        pages.add("<li class=\"page-item active\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
+                    } else {
+                        pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
+                    }
+                }
+                if (counterArticle <= 5) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Next</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/5\">Next</a></li>");
+                }
+                values.put("pages", pages);
+            }
             return Template.renderFreemarker(values,"/app.ftl");
         });
 
-        post("/loadArticle", (request, response) -> {
-            int startPosition = Integer.parseInt(request.queryParams("startPosition"));
-            String json = null;
+        get("/loadArticles/:startPosition", (request, response) -> {
+            int startPosition = Integer.parseInt(request.params("startPosition"));
+            Map<String, Object> values = new HashMap<>();
+            User user = request.session().attribute("user");
+            List<Article> articles = null;
             if (startPosition >= 0) {
-                List<Article> articles =  ArticleService.getInstance().findFive(startPosition);
-                for (Article article : articles){
-                    article.getAuthor().setPassword("");
-                    for (Comment c : article.getCommentList()) {
-                        c.getAuthor().setPassword("");
-                    }
-                    for (PubLike pubLike : article.getLikeList()) {
-                        pubLike.getUserLike().setPassword("");
+                articles =  ArticleService.getInstance().findFive(startPosition);
+            }
+            if(user != null){
+                values.put("user",user);
+                values.put("users", UserService.getInstance().findAll());
+            }
+            values.put("articles", articles);
+            int counterArticle = ArticleService.getInstance().countArticles();
+            if (counterArticle > 0) {
+                int pos = 1;
+                List<String> pages = new ArrayList<>();
+                if (startPosition == 0) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Previous</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+(startPosition-5)+"\">Previous</a></li>");
+                }
+                for (int i = 0;i<counterArticle;i+=5){
+                    if (startPosition == i) {
+                        pages.add("<li class=\"page-item active\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
+                    } else {
+                        pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+i+"\">"+(pos++)+"</a></li>");
                     }
                 }
-                json = new Gson().toJson(articles);
+                if (counterArticle <= (startPosition + 5)) {
+                    pages.add("<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\">Next</a></li>");
+                } else {
+                    pages.add("<li class=\"page-item\"><a class=\"page-link\" href=\"/loadArticles/"+(startPosition+5)+"\">Next</a></li>");
+                }
+                values.put("pages", pages);
             }
-            response.type("application/json");
-            return json;
+            return Template.renderFreemarker(values,"/app.ftl");
         });
 
         post("/registerUser",(request, response) -> {

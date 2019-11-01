@@ -21,9 +21,9 @@
   <#if !(user??)>
       <nav class="navbar navbar-dark  info-color fixed-top ">
           <a class="navbar-brand" href="#"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png" width="40" height="40">  <span class="ml-1 blog">Note-IT</span></a>
-          <form class="form-inline my-1">
+          <form action="/loadArticles/0" class="form-inline my-1" method="get">
               <div class="md-form form-sm my-0 ml-auto">
-                  <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" aria-label="Search">
+                  <input class="form-control form-control-sm mr-sm-2 mb-0" name="search" id="search" type="text" placeholder="Search Tag" aria-label="Search Tag">
               </div>
               <button class="btn btn-outline-white btn-sm my-0" type="submit">Buscar </button>
           </form>

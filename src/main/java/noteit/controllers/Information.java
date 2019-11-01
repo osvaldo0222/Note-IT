@@ -123,6 +123,10 @@ public class Information {
 
         get("/loadArticles/:startPosition", (request, response) -> {
             int startPosition = Integer.parseInt(request.params("startPosition"));
+            String filterTag = "";
+            if(request.queryParams("search") != null) {
+                filterTag = request.queryParams("search");
+            }
             Map<String, Object> values = new HashMap<>();
             User user = request.session().attribute("user");
             List<Article> articles = null;

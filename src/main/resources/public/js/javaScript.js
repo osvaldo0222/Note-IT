@@ -301,9 +301,9 @@ $(document).on('click', '#postArticle', function () {
         window.location = data;
     });
 });
-
 $(document).on('click', '#postArticle-update', function () {
     var title = $('input.name-article').val();
+    alert(title)
     var article = $('textarea.exampleFormControlTextarea5').val();
     var id = $('input#hidden').val();
     $.post("/updateArticle",{id:id,title:title, article:article, json:data}, function (data) {

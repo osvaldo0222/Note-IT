@@ -110,9 +110,33 @@ public class ArticleService extends GenericCRUD<Article> {
         return articles;
     }
 
+    public List<Article> findFive(int startPosition, String filterTag) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select distinct a from Article a join a.tagList ll where ll.tag = :tag order by a.date desc");
+        query.setParameter("tag", filterTag.toLowerCase());
+        query.setFirstResult(startPosition);
+        query.setMaxResults(5);
+        List<Article> articles = query.getResultList();
+        for (Article aux : articles) {
+            aux.getTagList().size();
+            em.detach(aux);
+        }
+        em.close();
+        return articles;
+    }
+
     public Integer countArticles(){
         EntityManager em = getEntityManager();
         Query query = em.createQuery("select count(a) from Article a");
+        Integer result = Integer.parseInt(query.getSingleResult().toString());
+        em.close();
+        return result;
+    }
+
+    public Integer countArticles(String filterTag){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select count(a) from Article a join a.tagList tl where tl.tag = :tag");
+        query.setParameter("tag", filterTag.toLowerCase());
         Integer result = Integer.parseInt(query.getSingleResult().toString());
         em.close();
         return result;

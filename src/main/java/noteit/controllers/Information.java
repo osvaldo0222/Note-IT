@@ -175,6 +175,7 @@ public class Information {
             String password = request.queryParams("password");
             Boolean isAdmin = (request.queryParams("materialUncheckedAdmin") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAdmin"));
             Boolean isAuthor = (request.queryParams("materialUncheckedAuthor") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAuthor"));
+
             User user = new User();
             user.setUsername(username);
             user.setName(name);
@@ -195,6 +196,8 @@ public class Information {
             String password = request.queryParams("password");
             Boolean isAdmin = (request.queryParams("materialUncheckedAdmin") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAdmin"));
             Boolean isAuthor = (request.queryParams("materialUncheckedAuthor") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAuthor"));
+            System.out.println("Admin"+isAdmin);
+            System.out.println("Author"+isAuthor);
             User user =  UserService.getInstance().find(username);
             user.setName(name);
             user.setPassword(password);

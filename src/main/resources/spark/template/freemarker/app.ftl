@@ -245,10 +245,25 @@
                                   </div>
                                   <button class="btn btn-sm my-0 info-color " type="submit"><span style="color: white;"><i class="fas fa-search"></i></span> </button>
                               </form>
-
-
               </div>
-             
+              <div class="row">
+
+                  <div class="col-sm-11">
+                    <#if user?? >
+                        <div class="card border-info mb-3 position-fixed " style="max-width: 20rem; margin-top: 60px;" >
+                            <div class="card-header">Soy ${user.name}</div>
+                            <div class="card-body text-info">
+                                <h5 class="card-title"><#if user.administrator == true >Administrador <#elseif user.author == true > Autor <#else >Usuario nivel 1</#if></h5>
+                                <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's content.</p>
+                            </div>
+                        </div>
+                    </#if>
+
+                  </div>
+                  <div class="col-sm-1">
+
+                  </div>
+              </div>
           </div>
       </div>
   </div>

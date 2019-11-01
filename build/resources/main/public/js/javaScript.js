@@ -4,6 +4,7 @@ $(document).on('click','#editUser',function () {
     var name = curRow.find('td:eq(1)').text();
     var author = curRow.find('td:eq(2)').text();
     var admin = curRow.find('td:eq(3)').text();
+    console.log("User"+username + author + admin)
 
     $('#modalListUser').modal('hide')
     $('#titleModalRegister-update').empty()
@@ -29,6 +30,7 @@ $(document).on('click','#editUser',function () {
         $('#materialUncheckedAdmin').attr('value',false);
         $('#materialUncheckedAdmin').prop('checked',false);
     }
+    checkBox()
 
 });
 
@@ -58,7 +60,7 @@ $(document).on('click','#update-article',function () {
     var id = $(this).attr('value')
     $.post('/getArticle',{id:id},function (data) {
         var fromServer = JSON.parse(data)
-        alert(fromServer.length)
+
         $('label.title-update').attr('class','active')
         $('input.name-article').val(fromServer[0])
         $('textarea.textArticle').val(fromServer[1])
@@ -66,17 +68,15 @@ $(document).on('click','#update-article',function () {
         var j = 3;
         for (var i = 3;i<fromServer.length;i++){
             var span = document.createElement("span")
-            span.className = "badge badge-pill badge-info ml-1 "
+            span.className = "badge badge-pill badge-info ml-1 xhr"
             span.innerHTML = fromServer[j]
             $('div.tags').append(span)
             j++;
         }
-
-
-
     })
 
 })
+
 $(document).on('click', '.postArticle-update', function () {
     var title = $('input.name-article').val();
 
@@ -84,7 +84,7 @@ $(document).on('click', '.postArticle-update', function () {
     //var data = JSON.stringify(k);
     var article = $('textarea.exampleFormControlTextarea5').val();
     var id = $('input#hidden').val();
-    alert(data)
+
     $.post("/updateArticle",{id:id,title:title, article:article, json:data}, function (data) {
         window.location = data;
     });

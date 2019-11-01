@@ -203,7 +203,7 @@
                                 <#if user??>
                                     <#if user.administrator || user.username == article.author.username || comment.author.username == user.username >
                                     <div class="float-right">
-                                        <span class=""><a><i class="far fa-trash-alt"></i></a></span>
+                                        <span class=""><a href="/deleteComment/${comment.id}"><i class="far fa-trash-alt"></i></a></span>
                                     </div>
                                 </#if>
                                 </#if>

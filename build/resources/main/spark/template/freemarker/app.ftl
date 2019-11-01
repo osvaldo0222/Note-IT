@@ -48,7 +48,7 @@
                 <div class="row">
                   <div class="col-md-12">
                       <div>
-                          <img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png">  <span class="ml-1 blog">Note-IT</span>
+                          <a href="/"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png">  <span class="ml-1 blog">Note-IT</span></a>
                            </div>
                   </div>
                 </div>
@@ -89,8 +89,8 @@
           <div class="col-md-6 gedf-main">
 
               <!--- \\\\\\\Post-->
-              <#if user??>
-
+              <#if user??  >
+                <#if  user.administrator == true || user.author == true>
               <div class="card gedf-card">
                   <div class="card-header">
                       <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -149,6 +149,7 @@
                   <!--Input field for post-->
               </div>
                   <br>
+                    </#if>
               </#if>
               <!-- Post /////-->
 
@@ -238,25 +239,18 @@
 
           </div>
           <div class="col-md-3 ">
-              <div class="card gedf-card position-fixed" id="right-column">
-                  <ul class="list-group">
-                      <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action active">
-                          ->Como se filtrar las etiquetas
-                       
-                        </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Cras justo odio
-                        <span class="badge badge-primary badge-pill">14</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Dapibus ac facilisis in
-                        <span class="badge badge-primary badge-pill">2</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Morbi leo risus
-                        <span class="badge badge-primary badge-pill">1</span>
-                      </li>
-                    </ul>
+
+              <div class=" position-fixed" id="right-column">
+
+
+                              <form action="/loadArticles/0" class="form-inline my-1" method="get">
+                                  <div class="md-form form-sm my-0 ml-auto">
+                                      <input class="form-control form-control-sm mr-sm-2 mb-0 ml-1" name="search" id="search" type="text" placeholder="Buscar Tag" aria-label="Buscar Tag" value="<#if filterTag??>${filterTag}</#if>">
+                                  </div>
+                                  <button class="btn btn-sm my-0 info-color " type="submit"><span style="color: white;"><i class="fas fa-search"></i></span> </button>
+                              </form>
+
+
               </div>
              
           </div>

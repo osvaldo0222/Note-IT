@@ -202,6 +202,14 @@
                             <img class="card-img-64 d-flex mx-auto mb-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg"
                                  alt="Generic placeholder image">
                             <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                <#if user??>
+                                    <#if user.administrator || user.username == article.author.username || comment.author.username == user.username >
+                                    <div class="float-right">
+                                        <span class=""><a><i class="far fa-trash-alt"></i></a></span>
+                                    </div>
+                                </#if>
+                                </#if>
+
                                 <h5 class="font-weight-bold mt-0">
                                     <a href="">${comment.author.name}</a>
                                     <a href="" class="pull-right">
@@ -256,25 +264,17 @@
 
         </div>
         <div class="col-md-3 ">
-            <div class="card gedf-card position-fixed" id="right-column">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action active">
-                        ->Como se filtrar las etiquetas
+            <div class=" position-fixed" id="right-column">
 
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Cras justo odio
-                        <span class="badge badge-primary badge-pill">14</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Dapibus ac facilisis in
-                        <span class="badge badge-primary badge-pill">2</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Morbi leo risus
-                        <span class="badge badge-primary badge-pill">1</span>
-                    </li>
-                </ul>
+
+                <form action="/loadArticles/0" class="form-inline my-1" method="get">
+                    <div class="md-form form-sm my-0 ml-auto">
+                        <input class="form-control form-control-sm mr-sm-2 mb-0 ml-1" name="search" id="search" type="text" placeholder="Buscar Tag" aria-label="Buscar Tag" value="<#if filterTag??>${filterTag}</#if>">
+                    </div>
+                    <button class="btn btn-sm my-0 info-color " type="submit"><span style="color: white;"><i class="fas fa-search"></i></span> </button>
+                </form>
+
+
             </div>
 
         </div>

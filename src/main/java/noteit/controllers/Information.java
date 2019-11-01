@@ -1,20 +1,21 @@
 package noteit.controllers;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jdk.nashorn.internal.ir.ReturnNode;
 import net.bytebuddy.asm.Advice;
 import noteit.blog.*;
-import noteit.services.ArticleService;
-import noteit.services.CommentService;
-import noteit.services.LikeService;
-import noteit.services.UserService;
+import noteit.services.*;
 import org.graalvm.compiler.lir.LIRInstruction;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Session;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,6 +23,52 @@ import static spark.Spark.*;
 
 public class Information {
     public void informationControllers(){
+
+        post("/updatearticle",(request, response) -> {
+            User user = request.session().attribute("user");
+            String title = request.queryParams("title");
+            System.out.println(title);
+            String articleBody = request.queryParams("article");
+            String jsonArray = request.queryParams("json");
+            String id = request.queryParams("id");
+            Article article = ArticleService.getInstance().find(Long.parseLong(id));
+            article.setTitle(title);
+            article.setBody(articleBody);
+            if (jsonArray != null){
+                JSONArray json = new JSONArray(jsonArray);
+                for (int i =0;i<json.length();i++){
+                    article.addTag(new Tag(json.get(i).toString()));
+                }
+            }
+            ArticleService.getInstance().update(article);
+            //response.redirect("/seeArticle/"+id);
+            return "/seeArticle/"+id;
+        });
+
+        post("/getArticle",(request, response) -> {
+             List<String> articles = new ArrayList<>();
+             articles.add(0,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTitle());
+             articles.add(1,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getBody());
+            articles.add(2,(request.queryParams("id")));
+
+             int j = 3;
+             for (int i = 0;i<ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTagList().size();i++){
+                 articles.add(j,ArticleService.getInstance().find(Long.parseLong(request.queryParams("id"))).getTagList().get(i).getTag());
+                 j++;
+             }
+
+             ObjectMapper mapper = new ObjectMapper();
+             String x = mapper.writeValueAsString(articles);
+            System.out.println(x);
+            return x;
+        });
+
+        get("/deleteUser/:id",(request, response) -> {
+            UserService.getInstance().delete(request.params("id"));
+            response.redirect("/");
+            return "";
+        });
+
         get("/deleteArticle/:id",(request, response) -> {
             ArticleService.getInstance().delete(Long.parseLong(request.params("id")));
             response.redirect("/");
@@ -81,6 +128,12 @@ public class Information {
             String password = request.queryParams("password");
             Boolean isAdmin = (request.queryParams("materialUncheckedAdmin") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAdmin"));
             Boolean isAuthor = (request.queryParams("materialUncheckedAuthor") == null)?false:Boolean.parseBoolean(request.queryParams("materialUncheckedAuthor"));
+            User user =  UserService.getInstance().find(username);
+            user.setName(name);
+            user.setPassword(password);
+            user.setAdministrator(isAdmin);
+            user.setAuthor(isAuthor);
+            UserService.getInstance().update(user);
             System.out.println(username + name + password + isAdmin + isAuthor);
             response.redirect("/");
             return "";

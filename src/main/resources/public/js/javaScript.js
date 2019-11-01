@@ -29,6 +29,7 @@ $(document).on('click','#editUser',function () {
         $('#materialUncheckedAdmin').attr('value',false);
         $('#materialUncheckedAdmin').prop('checked',false);
     }
+
 });
 
 $(document).on('click','#deleteModalConfirmDeleteArticle',function () {
@@ -41,10 +42,39 @@ $(document).on('click','#deleteModalConfirmDeleteArticle',function () {
 });
 
 $(document).on('click','#deleteModalConfirm',function () {
+    var curRow = $(this).closest('tr');
+    var username = curRow.find('td:eq(0)').text();
     $('#modalConfirmDelete p#confirmTitle').empty();
     $('#modalConfirmDelete p#confirmTitle').text("Eliminar Usuario");
-    $('#messageDelete').text("Seguro de eliminar el usuario ")
+    $('a#delete-user-article').attr('href','/deleteUser/'+username)
+    $('#messageDelete').text("Seguro de eliminar el usuario "+username)
 });
+
+$(document).on('click','#update-article',function () {
+    var id = $(this).attr('value')
+    $.post('/getArticle',{id:id},function (data) {
+        var fromServer = JSON.parse(data)
+        alert(fromServer.length)
+        $('label.title-update').attr('class','active')
+        $('input.name-article').val(fromServer[0])
+        $('textarea.textArticle').val(fromServer[1])
+        $('input#hidden').val(fromServer[2]);
+        var j = 3;
+        for (var i = 3;i<fromServer.length;i++){
+            var span = document.createElement("span")
+            span.className = "badge badge-pill badge-info ml-1 "
+            span.innerHTML = fromServer[j]
+            $('div.tags').append(span)
+            j++;
+        }
+
+
+
+    })
+
+})
+
+
 
 listUser();
 $(document).ready(function(){
@@ -67,9 +97,7 @@ $(document).ready(function(){
 
       });
 
-      $('#deleteModalConfirm').click(function(){
-        //$('#modalListUser').modal('hide')
-      })
+
 });
 
 function checkBox() {
@@ -274,3 +302,11 @@ $(document).on('click', '#postArticle', function () {
     });
 });
 
+$(document).on('click', '#postArticle-update', function () {
+    var title = $('input.name-article').val();
+    var article = $('textarea.exampleFormControlTextarea5').val();
+    var id = $('input#hidden').val();
+    $.post("/updateArticle",{id:id,title:title, article:article, json:data}, function (data) {
+        window.location = data;
+    });
+});

@@ -373,7 +373,7 @@
 
       <!--Footer-->
       <div class="modal-footer flex-center">
-        <a href="" class="btn  btn-outline-danger" type="submit">Si!</a>
+        <a href="" class="btn  btn-outline-danger" type="submit" id="delete-user-article">Si!</a>
         <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancelar</a>
       </div>
     </div>

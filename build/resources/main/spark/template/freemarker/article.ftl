@@ -122,7 +122,7 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                                                     <div class="h6 dropdown-header">Modificaciones</div>
-                                                    <a class="dropdown-item" href="#">Editar artículo</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateArticle" id="update-article" value="${article.id}">Editar artículo</a>
                                                     <a class="dropdown-item" id="deleteModalConfirmDeleteArticle" data-toggle="modal" data-target="#modalConfirmDelete" >Eliminar artículo</a>
 
                                                 </div>
@@ -171,7 +171,27 @@
             <!-- Post model /////-->
             <div class="row">
                 <div class="col-sm-12">
-                    <!--Section: Comments-->
+                    <!--Section: Comments--><div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
                     <section class="my-5">
 
                         <!-- Card header -->
@@ -295,7 +315,6 @@
 
 
 <!--Register user modal-->
-<!-- Central Modal Small -->
 <form action="" method="POST" class="register-update" id="register-update">
     <div class="modal fade" id="RegisterUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -348,8 +367,7 @@
             </div>
         </div>
     </div>
-</form>
-<!-- Central Modal Small -->
+</form><!-- Central Modal Small -->
 
 <!--Modal confirm delete-->
 <!--Modal: modalConfirmDelete-->
@@ -385,6 +403,89 @@
         <!--/.Content-->
     </div>
 </div>
+
+
+<div class="modal fade" id="updateArticle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-lg" role="document">
+
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="card gedf-card">
+                    <div class="card-header">
+                       <div class="float-right">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+
+                       </div>
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Editar Publicación</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="form-group green-border-focus">
+                                    <!--Input field for post-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="md-form form-sm">
+                                                <input type="hidden" id="hidden">
+                                                <input type="text" id="inputSMEx" class="pubTitle form-control form-control-sm name-article" name="name-article">
+                                                <label for="inputSMEx" class="title-update">Título</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="md-form form-sm">
+                                                <input type="text" id="inputSMEx" class="pubPublication form-control form-control-sm tags-input">
+                                                <label for="inputSMEx">Etiquetas</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-2">
+                                            Tags:
+
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="tags">
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <textarea class="form-control exampleFormControlTextarea5 textArticle" id="exampleFormControlTextarea5" rows="3" name="textArticle"></textarea>
+                                </div>
+                                <!--Form for article to submit-->
+                            </div>
+                        </div>
+                        <div class="btn-toolbar justify-content-between float-right">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" id="postArticle-update">Publicar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Input field for post-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->
 <!-- Start your project here-->
 <!-- SCRIPTS -->
 <!-- JQuery -->

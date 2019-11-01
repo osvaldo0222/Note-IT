@@ -302,6 +302,19 @@ public class Information {
             }
             return status;
         });
+
+        get("/deleteComment/:id", (request, response) -> {
+            User user = request.session().attribute("user");
+            Comment comment = CommentService.getInstance().find(Long.parseLong(request.params("id")));
+            long article = comment.getArticle().getId();
+            if (user != null) {
+                if (user.isAdministrator() || comment.getAuthor().getUsername().equals(user.getUsername())){
+                    CommentService.getInstance().delete(comment.getId());
+                }
+            }
+            response.redirect("/seeArticle/" + article);
+            return "";
+        });
     }
 
 }

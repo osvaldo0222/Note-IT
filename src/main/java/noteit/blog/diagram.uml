@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="99.75657894736844" y="864.0">noteit.blog.Article</node>
+    <node x="167.33333333333331" y="400.0">noteit.blog.PubLike</node>
+    <node x="48.75657894736841" y="611.0">noteit.blog.Comment</node>
+    <node x="0.0" y="0.0">noteit.blog.Tag</node>
+    <node x="79.8377192982456" y="167.0">noteit.blog.User</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="noteit.blog.User" target="noteit.blog.Tag">
+      <point x="2.8421709430404007E-14" y="-91.5" />
+      <point x="235.83771929824564" y="142.0" />
+      <point x="95.83333333333334" y="142.0" />
+      <point x="38.33333333333334" y="58.5" />
+    </edge>
+    <edge source="noteit.blog.PubLike" target="noteit.blog.User">
+      <point x="46.75" y="-80.5" />
+      <point x="307.5833333333333" y="380.0" />
+      <point x="261.83771929824564" y="380.0" />
+      <point x="26.00000000000003" y="91.5" />
+    </edge>
+    <edge source="noteit.blog.Article" target="noteit.blog.Tag">
+      <point x="-108.0" y="-124.5" />
+      <point x="111.75657894736844" y="844.0" />
+      <point x="27.25657894736841" y="844.0" />
+      <point x="27.25657894736841" y="142.0" />
+      <point x="19.166666666666657" y="142.0" />
+      <point x="-38.33333333333334" y="58.5" />
+    </edge>
+    <edge source="noteit.blog.Article" target="noteit.blog.PubLike">
+      <point x="36.0" y="-124.5" />
+      <point x="255.75657894736844" y="814.0" />
+      <point x="292.31907894736844" y="814.0" />
+      <point x="292.31907894736844" y="586.0" />
+      <point x="284.2083333333333" y="586.0" />
+      <point x="23.375" y="80.5" />
+    </edge>
+    <edge source="noteit.blog.Comment" target="noteit.blog.PubLike">
+      <point x="28.50000000000003" y="-91.5" />
+      <point x="-70.125" y="80.5" />
+    </edge>
+    <edge source="noteit.blog.Comment" target="noteit.blog.Article">
+      <point x="85.50000000000003" y="91.5" />
+      <point x="248.25657894736844" y="844.0" />
+      <point x="231.75657894736844" y="844.0" />
+      <point x="12.0" y="-124.5" />
+    </edge>
+    <edge source="noteit.blog.Article" target="noteit.blog.Comment">
+      <point x="-36.0" y="-124.5" />
+      <point x="183.75657894736844" y="814.0" />
+      <point x="134.2565789473684" y="814.0" />
+      <point x="-28.5" y="91.5" />
+    </edge>
+    <edge source="noteit.blog.Comment" target="noteit.blog.User">
+      <point x="-85.49999999999997" y="-91.5" />
+      <point x="77.25657894736844" y="586.0" />
+      <point x="99.85197368421055" y="586.0" />
+      <point x="99.85197368421055" y="380.0" />
+      <point x="105.8377192982456" y="380.0" />
+      <point x="-130.0" y="91.5" />
+    </edge>
+    <edge source="noteit.blog.Article" target="noteit.blog.User">
+      <point x="84.0" y="-124.5" />
+      <point x="303.75657894736844" y="834.0" />
+      <point x="364.8333333333333" y="834.0" />
+      <point x="364.8333333333333" y="380.0" />
+      <point x="313.83771929824564" y="380.0" />
+      <point x="78.00000000000004" y="91.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8765903307888041" x="299.532656023222" y="373.0" />
+  <SelectedNodes>
+    <node>noteit.blog.Article</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

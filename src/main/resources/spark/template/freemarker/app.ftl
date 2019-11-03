@@ -37,29 +37,29 @@
   </#if>
 
 
-  <div class="con114tainer-fluid gedf-wrapper" id="firstRow">
+  <div class="container-fluid gedf-wrapper" id="firstRow">
 
       <div class="row">
 
 
-          <div class="col-md-3 " id="">
+          <div class="col-sm-3 " id="">
               <div class=" sticky-top" id="right-column">
                   <#if user??>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-sm-12">
                       <div>
                           <a href="/"><img src="https://img.icons8.com/ultraviolet/60/000000/my-topic.png">  <span class="ml-1 blog">Note-IT</span></a>
                            </div>
                   </div>
                 </div>
                   <div class="row">
-                      <div class="col">
+                      <div class="col-sm">
 
 
                       </div>
                   </div>
                 <div class="row">
-                  <div class="col-md-11">
+                  <div class="col-sm-11">
                    
                       <div class="list-group list-group-flush ">
                           <#if user.administrator == true>
@@ -84,7 +84,7 @@
 
 
 
-          <div class="col-md-6 gedf-main">
+          <div class="col-sm-6 gedf-main">
 
               <!--- \\\\\\\Post-->
               <#if user??  >
@@ -119,11 +119,11 @@
                                   </div>
                                 </div>
                                   <div class="row mb-2">
-                                      <div class="col-2">
+                                      <div class="col-sm-2">
                                           Tags:
 
                                       </div>
-                                      <div class="col-10">
+                                      <div class="col-sm-10">
                                           <div class="tags">
 
 
@@ -152,7 +152,7 @@
               <!-- Post /////-->
 
               <div class="row">
-                  <div class="col-12 articles">
+                  <div class="col-sm-12 articles">
                       <!--- \\\\\\\Post model-->
                       <#if articles??>
 
@@ -236,7 +236,7 @@
 
 
           </div>
-          <div class="col-md-3 ">
+          <div class="col-sm-3 ">
 
               <div class=" position-fixed" id="right-column">
                               <form action="/loadArticles/0" class="form-inline my-1" method="get">

@@ -3,79 +3,67 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="99.75657894736844" y="864.0">noteit.blog.Article</node>
-    <node x="167.33333333333331" y="400.0">noteit.blog.PubLike</node>
-    <node x="48.75657894736841" y="611.0">noteit.blog.Comment</node>
-    <node x="0.0" y="0.0">noteit.blog.Tag</node>
-    <node x="79.8377192982456" y="167.0">noteit.blog.User</node>
+    <node x="0.5" y="470.0">noteit.blog.Article</node>
+    <node x="148.0" y="247.0">noteit.blog.PubLike</node>
+    <node x="124.76388888888889" y="789.0">noteit.blog.Comment</node>
+    <node x="0.0" y="271.0">noteit.blog.Tag</node>
+    <node x="75.88888888888889" y="0.0">noteit.blog.User</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="noteit.blog.User" target="noteit.blog.Tag">
-      <point x="2.8421709430404007E-14" y="-91.5" />
-      <point x="235.83771929824564" y="142.0" />
-      <point x="95.83333333333334" y="142.0" />
-      <point x="38.33333333333334" y="58.5" />
-    </edge>
     <edge source="noteit.blog.PubLike" target="noteit.blog.User">
-      <point x="46.75" y="-80.5" />
-      <point x="307.5833333333333" y="380.0" />
-      <point x="261.83771929824564" y="380.0" />
-      <point x="26.00000000000003" y="91.5" />
+      <point x="0.0" y="-86.5" />
+      <point x="252.5" y="222.0" />
+      <point x="254.38888888888889" y="222.0" />
+      <point x="0.0" y="98.5" />
     </edge>
     <edge source="noteit.blog.Article" target="noteit.blog.Tag">
-      <point x="-108.0" y="-124.5" />
-      <point x="111.75657894736844" y="844.0" />
-      <point x="27.25657894736841" y="844.0" />
-      <point x="27.25657894736841" y="142.0" />
-      <point x="19.166666666666657" y="142.0" />
-      <point x="-38.33333333333334" y="58.5" />
-    </edge>
-    <edge source="noteit.blog.Article" target="noteit.blog.PubLike">
-      <point x="36.0" y="-124.5" />
-      <point x="255.75657894736844" y="814.0" />
-      <point x="292.31907894736844" y="814.0" />
-      <point x="292.31907894736844" y="586.0" />
-      <point x="284.2083333333333" y="586.0" />
-      <point x="23.375" y="80.5" />
+      <point x="-91.33333333333331" y="-134.5" />
+      <point x="46.166666666666686" y="445.0" />
+      <point x="63.5" y="445.0" />
+      <point x="0.0" y="62.5" />
     </edge>
     <edge source="noteit.blog.Comment" target="noteit.blog.PubLike">
-      <point x="28.50000000000003" y="-91.5" />
-      <point x="-70.125" y="80.5" />
+      <point x="32.375" y="-98.5" />
+      <point x="286.6388888888889" y="764.0" />
+      <point x="304.75" y="764.0" />
+      <point x="52.25" y="86.5" />
     </edge>
-    <edge source="noteit.blog.Comment" target="noteit.blog.Article">
-      <point x="85.50000000000003" y="91.5" />
-      <point x="248.25657894736844" y="844.0" />
-      <point x="231.75657894736844" y="844.0" />
-      <point x="12.0" y="-124.5" />
+    <edge source="noteit.blog.Article" target="noteit.blog.PubLike">
+      <point x="91.33333333333331" y="-134.5" />
+      <point x="228.83333333333331" y="445.0" />
+      <point x="200.25" y="445.0" />
+      <point x="-52.25" y="86.5" />
     </edge>
     <edge source="noteit.blog.Article" target="noteit.blog.Comment">
-      <point x="-36.0" y="-124.5" />
-      <point x="183.75657894736844" y="814.0" />
-      <point x="134.2565789473684" y="814.0" />
-      <point x="-28.5" y="91.5" />
+      <point x="68.5" y="134.5" />
+      <point x="206.0" y="764.0" />
+      <point x="221.88888888888889" y="764.0" />
+      <point x="-32.375" y="-98.5" />
+    </edge>
+    <edge source="noteit.blog.Comment" target="noteit.blog.Article">
+      <point x="-97.125" y="-98.5" />
+      <point x="157.13888888888889" y="764.0" />
+      <point x="69.0" y="764.0" />
+      <point x="-68.5" y="134.5" />
     </edge>
     <edge source="noteit.blog.Comment" target="noteit.blog.User">
-      <point x="-85.49999999999997" y="-91.5" />
-      <point x="77.25657894736844" y="586.0" />
-      <point x="99.85197368421055" y="586.0" />
-      <point x="99.85197368421055" y="380.0" />
-      <point x="105.8377192982456" y="380.0" />
-      <point x="-130.0" y="91.5" />
+      <point x="97.125" y="-98.5" />
+      <point x="351.3888888888889" y="764.0" />
+      <point x="367.5" y="764.0" />
+      <point x="367.5" y="222.0" />
+      <point x="373.3888888888889" y="222.0" />
+      <point x="119.0" y="98.5" />
     </edge>
     <edge source="noteit.blog.Article" target="noteit.blog.User">
-      <point x="84.0" y="-124.5" />
-      <point x="303.75657894736844" y="834.0" />
-      <point x="364.8333333333333" y="834.0" />
-      <point x="364.8333333333333" y="380.0" />
-      <point x="313.83771929824564" y="380.0" />
-      <point x="78.00000000000004" y="91.5" />
+      <point x="0.0" y="-134.5" />
+      <point x="137.5" y="222.0" />
+      <point x="135.38888888888889" y="222.0" />
+      <point x="-119.0" y="98.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.8765903307888041" x="299.532656023222" y="373.0" />
-  <SelectedNodes>
-    <node>noteit.blog.Article</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="0.8765903307888041" x="300.0" y="631.989840348331" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>

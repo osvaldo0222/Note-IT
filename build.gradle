@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
 group 'noteit.blog'
@@ -12,6 +13,12 @@ mainClassName = 'noteit.main.Main'
 
 repositories {
     mavenCentral()
+}
+
+shadowJar {
+    baseName = 'NoteIT-BLOG'
+    classifier = null
+    version = null
 }
 
 dependencies {
